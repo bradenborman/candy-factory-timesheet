@@ -42,6 +42,7 @@ task finalizeBuild(type: Copy, dependsOn: build) {
 	from "${buildDir}/libs/server-${version}.war"
 	into "${buildDir}/libs"
 	rename "server-${version}.war", "candy-factory-timesheet.war"
+	delete "server-${version}.war"
 }
 
 bootWar.dependsOn(copyClient)
