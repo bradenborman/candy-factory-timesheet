@@ -1,0 +1,67 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  tr {
+    th {
+      font-size: 1.2em;
+      padding-left: 10px;
+      padding-bottom: 10px;
+      &.emp-info {
+        width: 80%;
+      }
+    }
+    td {
+      border-top: 1px solid;
+      text-align: center;
+      padding: 1px 2px 1px 2px;
+      vertical-align: middle;
+
+      div {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px;
+        margin: 0px 10px 0px 10px;
+        font-size: 0.8em;
+
+        &.name-phone {
+          float: left;
+          text-align: left;
+          .name {
+            font-size: 1.5em;
+            font-weight: bold;
+          }
+        }
+        &.email {
+          margin: left;
+        }
+        &.address {
+          max-width: 230px;
+        }
+      }
+
+      i {
+        font-size: 1.3em;
+        transition: all 0.1s;
+        cursor: pointer;
+        &.clockIn {
+          color: green;
+          padding: 5px;
+        }
+        &.clockOut {
+          color: black;
+        }
+      }
+      i:hover {
+        font-size: 1.7em;
+        &.clockIn {
+          color: rgb(32, 184, 32);
+        }
+        &.clockOut {
+          color: red;
+        }
+      }
+    }
+  }
+}
