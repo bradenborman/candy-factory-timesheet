@@ -1,47 +1,68 @@
-import React, { useState, useEffect } from "react";
-import UserDetails from "../../../models/userdetails";
+import React from "react";
 import { formatPhoneNumber } from "../../../utilities/phonenumberhelper";
+import ShiftDetails from "../../../models/shiftDetials";
 
 require("./table.scss");
 
 export interface ITableRowProps {
-  userdetails: UserDetails;
-  updateClockIn: (number: number) => void
-  updateClockOut: (number: number) => void
+  userdetails: ShiftDetails;
+  updateClockIn: (number: number) => void;
+  updateClockOut: (number: number) => void;
 }
 
 export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
-  
-
   const getClockInDetails = (): JSX.Element => {
-    if (props.userdetails.clockedIn != null && props.userdetails.clockedIn != "") {
-      return <span>{props.userdetails.clockedIn}</span>
+    if (
+      props.userdetails.clockInTime != null &&
+      props.userdetails.clockInTime != ""
+    ) {
+      return <span>{props.userdetails.clockInTime}</span>;
     } else {
-      return <i onDoubleClick={() => props.updateClockIn(props.userdetails.personId)} className="fa fa-play clockIn" aria-hidden="true"></i>
+      return (
+        <i
+          onDoubleClick={() => props.updateClockIn(props.userdetails.personId)}
+          className="fa fa-play clockIn"
+          aria-hidden="true"
+        ></i>
+      );
     }
-  }
+  };
 
   const getClockOutDetails = (): JSX.Element => {
-    if (props.userdetails.clockedOut != null && props.userdetails.clockedOut != "") {
-      return <span>{props.userdetails.clockedOut}</span>
-    } else if(props.userdetails.clockedIn != null && props.userdetails.clockedIn != "") {
-      return <i onDoubleClick={() => props.updateClockOut(props.userdetails.personId)} className="fa fa-check-circle clockOut" aria-hidden="true"></i>
+    if (
+      props.userdetails.clockOutTime != null &&
+      props.userdetails.clockOutTime != ""
+    ) {
+      return <span>{props.userdetails.clockOutTime}</span>;
+    } else if (
+      props.userdetails.clockInTime != null &&
+      props.userdetails.clockInTime != ""
+    ) {
+      return (
+        <i
+          onDoubleClick={() => props.updateClockOut(props.userdetails.personId)}
+          className="fa fa-check-circle clockOut"
+          aria-hidden="true"
+        ></i>
+      );
     } else {
-      return <span></span> //empty
+      return <span></span>; //empty
     }
-  }
-  
+  };
+
   return (
     <tr>
       <td>
-        <div className="name-phone"><span className="name">{props.userdetails.name}</span>
-          <br />{formatPhoneNumber(props.userdetails.phone)}         
+        <div className="name-phone">
+          <span className="name">{props.userdetails.name}</span>
+          <br />
+          {formatPhoneNumber(props.userdetails.phoneNumber)}
         </div>
         <div className="email">{props.userdetails.email}</div>
         <div className="address">{props.userdetails.address}</div>
       </td>
       <td>{getClockInDetails()}</td>
-      <td>{getClockOutDetails()}</td>  
+      <td>{getClockOutDetails()}</td>
     </tr>
   );
 };

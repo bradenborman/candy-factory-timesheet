@@ -9,12 +9,16 @@ export interface ITableProps {
 export const TimeSheetTable: React.FC<ITableProps> = (props: ITableProps) => {
   return (
     <table className="table">
-      <tr>
-        <th className="emp-info"><i className="fa fa-user" aria-hidden="true"></i> Employee</th>
-        <th>Time-In</th>
-        <th>Time-Out</th>
-      </tr>
-      {props.children}
+      <thead>
+        <tr>
+          <th className="emp-info">
+            <i className="fa fa-user" aria-hidden="true"></i> Employee
+          </th>
+          <th>Time-In</th>
+          <th>Time-Out</th>
+        </tr>
+      </thead>
+      <tbody>{props.children}</tbody>
     </table>
   );
 };

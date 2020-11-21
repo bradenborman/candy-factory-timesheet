@@ -2,7 +2,7 @@
   display: inline-block;
   width: 100%;
   margin: 0px;
-  
+
   .time-sheet {
     margin: auto;
     margin-top: 20px;
@@ -12,7 +12,6 @@
     background-color: white;
     padding: 10px;
     border-radius: 12px;
-
 
     h2 {
       display: inline-block;
@@ -33,10 +32,11 @@
 
       button {
         cursor: pointer;
+        font-size: 1.5em;
         padding: 10px;
         border-radius: 5px;
-        box-shadow: #B43246 2px 2px;
-      }      
+        box-shadow: #b43246 2px 2px;
+      }
     }
   }
 
@@ -50,31 +50,60 @@
     background-repeat: no-repeat;
 
     #activeSection {
+      border-radius: 20px;
       margin: auto;
       margin-top: 15vh;
       width: 40vw;
-      background-color:white;
+      background-color: white;
       padding: 20px;
+      clip-path: circle(0%);
+      animation: loadin 1s 1;
+      animation-fill-mode: forwards;
 
       box-shadow: rgba(0, 0, 0, 0.616) 5px 6px;
+
+      p {
+        margin-top: 30px;
+        margin-bottom: 40px;
+      }
+
+      .rosterSelectionDiv {
+        min-height: 200px;
+
+        .rosterSelectionName {
+          cursor: pointer;
+          font-size: 1.1em;
+          border: 1px solid darkgray;
+          padding: 8px 5px 8px 5px;
+          margin: 15px;
+          background-color: rgb(223, 221, 221);
+        }
+      }
 
       .inputs {
         min-height: 200px;
       }
-    
+
       .button-wrapper {
         text-align: center;
-       
-      button {
-        cursor: pointer;
-        width: 130px;
-        margin: 10px;
-        padding: 10px;
-        box-shadow: #B43246 2px 2px;
-      }}
 
+        button {
+          cursor: pointer;
+          width: 130px;
+          margin: 10px;
+          padding: 10px;
+          box-shadow: #b43246 2px 2px;
+        }
+      }
     }
-
   }
+}
 
+@keyframes loadin {
+  from {
+    clip-path: circle(0%);
+  }
+  to {
+    clip-path: circle(100%);
+  }
 }

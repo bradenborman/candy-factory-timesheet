@@ -1,19 +1,12 @@
 package cftimesheet.models;
 
-import java.time.LocalDate;
-
 public class Employee {
 
     private int id;
     private String name;
     private String email;
+    private String phoneNumber;
     private String address;
-
-    private int shiftId;
-    private LocalDate dateOfShift;
-    private String clockInTime;
-    private String clockOutTime;
-
 
     public int getId() {
         return id;
@@ -39,43 +32,19 @@ public class Employee {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public int getShiftId() {
-        return shiftId;
-    }
-
-    public void setShiftId(int shiftId) {
-        this.shiftId = shiftId;
-    }
-
-    public LocalDate getDateOfShift() {
-        return dateOfShift;
-    }
-
-    public void setDateOfShift(LocalDate dateOfShift) {
-        this.dateOfShift = dateOfShift;
-    }
-
-    public String getClockInTime() {
-        return clockInTime;
-    }
-
-    public void setClockInTime(String clockInTime) {
-        this.clockInTime = clockInTime;
-    }
-
-    public String getClockOutTime() {
-        return clockOutTime;
-    }
-
-    public void setClockOutTime(String clockOutTime) {
-        this.clockOutTime = clockOutTime;
     }
 }
