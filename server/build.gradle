@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.0'
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 	id 'war'
@@ -13,10 +13,18 @@ repositories {
 }
 
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	//For emails
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -33,6 +41,10 @@ task copyClient(dependsOn: ":client:clientBuild") {
 		}
 		copy {
 			from new File(project(":client").getProjectDir(), "build/index.html")
+			into "${buildDir}/resources/main/templates"
+		}
+		copy {
+			from new File(project(":client").getProjectDir(), "build/error.html")
 			into "${buildDir}/resources/main/templates"
 		}
 	}

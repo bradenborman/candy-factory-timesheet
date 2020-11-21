@@ -7,7 +7,7 @@ public class Server extends CandyFactoryTimesheetApplication {
     public static void main(String[] args) {
         new Server().configure(new SpringApplicationBuilder())
                 .initializers()
-                .profiles("local")
+//                .profiles("local")
                 .run(args);
     }
 }
