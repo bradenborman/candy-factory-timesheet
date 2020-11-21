@@ -1,4 +1,7 @@
 DROP TABLE IF EXISTS valentines_seasonal_help;
+DROP TABLE IF EXISTS employee_shift;
+--https://www.w3schools.com/sql/sql_datatypes.asp
+
 
 CREATE TABLE valentines_seasonal_help (
   emp_id INT AUTO_INCREMENT  PRIMARY KEY,
@@ -7,6 +10,14 @@ CREATE TABLE valentines_seasonal_help (
   emp_address VARCHAR(250) NULL,
   emp_email VARCHAR(250) NULL
 );
+
+
+CREATE TABLE employee_shift (
+  shift_id INT AUTO_INCREMENT  PRIMARY KEY,
+  shift_date DATE NOT NULL,
+  shift_clockIn VARCHAR(30) NULL,
+  shift_clockOut VARCHAR(250) NULL
+ );
 
 INSERT INTO valentines_seasonal_help
 (emp_name, emp_phone, emp_address, emp_email)
