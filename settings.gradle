@@ -1,0 +1,2 @@
+rootProject.name = 'candy-factory-timesheet'
+include 'server', 'client'

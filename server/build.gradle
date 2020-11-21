@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.0'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'borman'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.h2database:h2'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+	exclude '**/*integration/**'
+}
+
+task copyClient(dependsOn: ":client:clientBuild") {
+	doLast {
+		copy {
+			from new File(project(":client").getProjectDir(), "build")
+			into "${buildDir}/resources/main/static"
+		}
+		copy {
+			from new File(project(":client").getProjectDir(), "build/index.html")
+			into "${buildDir}/resources/main/templates"
+		}
+	}
+}
+
+task finalizeBuild(type: Copy, dependsOn: build) {
+	from "${buildDir}/libs/server-${version}.war"
+	into "${buildDir}/libs"
+	rename "server-${version}.war", "candy-factory-timesheet.war"
+}
+
+bootWar.dependsOn(copyClient)
+clean.dependsOn(":client:clientClean")
+build.finalizedBy(finalizeBuild)
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean

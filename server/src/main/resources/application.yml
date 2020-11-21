@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: "candy-factory-timesheet"
+  thymeleaf:
+    mode: HTML
+    cache: false
+  output:
+    ansi:
+      enabled: ALWAYS

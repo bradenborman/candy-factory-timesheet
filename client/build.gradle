@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+    }
+}
+
+apply plugin: 'com.moowork.node'
+
+node {
+    version = '12.13.0'
+    yarnVersion = '1.21.0'
+    nodeModulesDir = file("${project.projectDir}")
+    download = true
+}
+
+task clientClean {
+    doLast {
+        delete "node_modules"
+        delete "build"
+    }
+}
+
+task clientBuild(type: YarnTask, dependsOn: yarn_install) {
+    this.project.afterEvaluate {
+        getInputs().dir(file("${project.projectDir}/src"))
+        getOutputs().dir(file("${project.projectDir}/build"))
+    }
+
+    args = ['build']
+}
