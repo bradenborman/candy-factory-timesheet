@@ -1,5 +1,6 @@
 package cftimesheet.controllers;
 
+import cftimesheet.managers.ShiftManager;
 import cftimesheet.models.Employee;
 import cftimesheet.models.ShiftDetails;
 import cftimesheet.models.StartNewShiftRequest;
@@ -16,10 +17,12 @@ public class ApiController {
 
     EmailSendingService emailSendingService;
     DataRetrievalService dataRetrievalService;
+    ShiftManager shiftManager;
 
-    public ApiController(EmailSendingService emailSendingService, DataRetrievalService dataRetrievalService) {
+    public ApiController(EmailSendingService emailSendingService, DataRetrievalService dataRetrievalService, ShiftManager shiftManager) {
         this.emailSendingService = emailSendingService;
         this.dataRetrievalService = dataRetrievalService;
+        this.shiftManager = shiftManager;
     }
 
     @GetMapping("/email")
@@ -30,7 +33,7 @@ public class ApiController {
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllActiveEmployees() {
-        List<Employee> results =  dataRetrievalService.getAllActiveEmployees();
+        List<Employee> results = dataRetrievalService.getAllActiveEmployees();
         return ResponseEntity.ok(results);
     }
 
@@ -40,9 +43,8 @@ public class ApiController {
     }
 
     @PostMapping("start-shift")
-    public ResponseEntity<Void> startNewShift(@RequestBody StartNewShiftRequest startNewShiftRequest) throws InterruptedException {
-        System.out.println("Adding " + startNewShiftRequest.getPersonId() + " to new shift");
-        Thread.sleep(2000);
+    public ResponseEntity<Void> startNewShift(@RequestBody StartNewShiftRequest request) {
+        shiftManager.startNewShiftByEmployeeId(request.getPersonId(), request.getClockInTime());
         return ResponseEntity.ok().build();
     }
 

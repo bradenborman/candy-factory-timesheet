@@ -10,4 +10,8 @@ public interface Queries {
             "valentines_seasonal_help.emp_id= employee_shift.emp_id " +
             "WHERE shift_date = CURDATE()";
 
+    String START_SHIFT = "INSERT INTO employee_shift " +
+            "(emp_id, shift_date, shift_clockIn) " +
+            "VALUES (:personId, NOW(), :clockInTime)";
+
 }

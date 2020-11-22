@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { RosterSelection } from "./rosterselection";
 import Employee from "../../models/employee";
+import { formatTime } from "../../utilities/datehelper";
 
 require("./newshiftmodal.scss");
 
@@ -36,7 +37,8 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     setCallInProgress(true);
     try {
       const res: any = await axios.post(`/api/start-shift`, {
-        personId: activeIdSelected
+        personId: activeIdSelected,
+        clockInTime: formatTime(new Date())
       });
       if (res.status === 200) location.reload();
     } catch (err) {
