@@ -4,7 +4,7 @@ import { Navbar } from "../navbar/navbar";
 import { Timesheet } from "../timesheet/timesheet";
 import { formatTime } from "../../utilities/datehelper";
 import ShiftDetails from "../../models/shiftDetials";
-import Employee from "../../models/userdetails";
+import Employee from "../../models/employee";
 
 require("./app.scss");
 

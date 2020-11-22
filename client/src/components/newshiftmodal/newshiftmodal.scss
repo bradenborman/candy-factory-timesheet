@@ -1,0 +1,78 @@
+#addEmployeeModal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("/img/cool-background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  #activeSection {
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 15vh;
+    width: 40vw;
+    background-color: white;
+    padding: 20px;
+    clip-path: circle(0%);
+    animation: loadin 1s 1;
+    animation-fill-mode: forwards;
+
+    box-shadow: rgba(0, 0, 0, 0.616) 5px 6px;
+
+    p {
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .rosterSelectionDiv {
+      .rosterSelectionName {
+        cursor: pointer;
+        font-size: 1.1em;
+        border: 2px solid darkgray;
+        padding: 8px 5px 8px 5px;
+        margin: 15px;
+        background-color: rgb(223, 221, 221);
+
+        &.active {
+          background-color: white;
+          border: 2px solid green;
+          box-shadow: rgba(0, 128, 0, 0.5) 3px 3px;
+        }
+      }
+      .rosterSelectionName:hover {
+        box-shadow: rgba(0, 128, 0, 0.5) 3px 3px;
+      }
+    }
+
+    #addSelectedBtn {
+      margin-top: 40px;
+      margin-bottom: 70px;
+    }
+
+    .inputs {
+      min-height: 200px;
+    }
+
+    .button-wrapper {
+      text-align: center;
+
+      button {
+        cursor: pointer;
+        width: 130px;
+        margin: 10px;
+        padding: 10px;
+        // box-shadow: #b43246 2px 2px;
+      }
+    }
+  }
+}
+
+@keyframes loadin {
+  from {
+    clip-path: circle(0%);
+  }
+  to {
+    clip-path: circle(100%);
+  }
+}

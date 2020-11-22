@@ -11,7 +11,7 @@ public class ShiftDetailsMapper implements RowMapper<ShiftDetails> {
     @Override
     public ShiftDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
         ShiftDetails details = new ShiftDetails();
-        details.setId(rs.getInt("emp_id"));
+        details.setPersonId(rs.getInt("emp_id"));
         details.setName(rs.getString("emp_name"));
         details.setEmail(rs.getString("emp_email"));
         details.setPhoneNumber(rs.getString("emp_phone"));

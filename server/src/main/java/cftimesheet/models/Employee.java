@@ -2,18 +2,18 @@ package cftimesheet.models;
 
 public class Employee {
 
-    private int id;
+    private int personId;
     private String name;
     private String email;
     private String phoneNumber;
     private String address;
 
-    public int getId() {
-        return id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getName() {

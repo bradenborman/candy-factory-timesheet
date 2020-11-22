@@ -2,6 +2,7 @@ package cftimesheet.controllers;
 
 import cftimesheet.models.Employee;
 import cftimesheet.models.ShiftDetails;
+import cftimesheet.models.StartNewShiftRequest;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,20 @@ public class ApiController {
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllActiveEmployees() {
-        return ResponseEntity.ok(dataRetrievalService.getAllActiveEmployees());
+        List<Employee> results =  dataRetrievalService.getAllActiveEmployees();
+        return ResponseEntity.ok(results);
     }
 
     @GetMapping("/shifts:today")
     public ResponseEntity<List<ShiftDetails>> fetchShiftsToday() {
         return ResponseEntity.ok(dataRetrievalService.fetchShiftsToday());
+    }
+
+    @PostMapping("start-shift")
+    public ResponseEntity<Void> startNewShift(@RequestBody StartNewShiftRequest startNewShiftRequest) throws InterruptedException {
+        System.out.println("Adding " + startNewShiftRequest.getPersonId() + " to new shift");
+        Thread.sleep(2000);
+        return ResponseEntity.ok().build();
     }
 
 }

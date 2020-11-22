@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { TimeSheetTable } from "./table/timeSheetTable";
 import { TableRow } from "./table/tableRow";
-import Employee from "../../models/userdetails";
+import Employee from "../../models/employee";
 import ShiftDetails from "../../models/shiftDetials";
+import { NewShiftModal } from "../newshiftmodal/newshiftmodal";
 
 require("./timesheet.scss");
 
@@ -33,38 +34,6 @@ export const Timesheet: React.FC<ITimesheetProps> = (
     });
   };
 
-  const getRosterSelections = (): JSX.Element => {
-    const rosterSelections = props.roster.map((person, index) => {
-      return <span className="rosterSelectionName">{person.name}</span>;
-    });
-    return <div className="rosterSelectionDiv">{rosterSelections}</div>;
-  };
-
-  const addNewShiftModal = (): JSX.Element | null => {
-    if (addNewShiftModalActive) {
-      return (
-        <div id="addEmployeeModal">
-          <div id="activeSection">
-            <h2>New Shift - Sign on</h2>
-            <p>
-              <u>Please select your name:</u>
-            </p>
-            {getRosterSelections()}
-            <p>
-              <u>Or dont see your name? </u>
-            </p>
-            <div className="button-wrapper">
-              <button onClick={() => setAddNewShiftModalActive(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
     <div className="time-sheet-wrapper">
       <div className="time-sheet">
@@ -81,7 +50,11 @@ export const Timesheet: React.FC<ITimesheetProps> = (
         </div>
         <TimeSheetTable>{mapEmployees()}</TimeSheetTable>
       </div>
-      {addNewShiftModal()}
+      <NewShiftModal
+        roster={props.roster}
+        show={addNewShiftModalActive}
+        closeModal={setAddNewShiftModalActive}
+      />
     </div>
   );
 };

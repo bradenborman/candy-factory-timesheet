@@ -1,4 +1,4 @@
-import Employee from "./userdetails";
+import Employee from "./employee";
 
 export default interface ShiftDetails extends Employee {
   shiftId?: number;
