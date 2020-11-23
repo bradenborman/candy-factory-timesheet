@@ -18,4 +18,7 @@ public interface Queries {
             "SET shift_clockOut = :clockTime " +
             "WHERE emp_id = :personId AND shift_id = :shiftId;";
 
+    String COUNT_UN_FULL_FILLED_SHIFTS = "SELECT count(emp_id) FROM employee_shift WHERE shift_clockOut is null AND emp_id = :empId";
+
+
 }

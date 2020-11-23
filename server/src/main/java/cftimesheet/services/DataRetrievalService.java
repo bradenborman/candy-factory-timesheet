@@ -24,4 +24,9 @@ public class DataRetrievalService {
         return employeeDao.fetchShiftsToday();
     }
 
+    public boolean doesEmployeeHaveUnfulfilledShift(int employeeIdToCheck) {
+        Integer openCount = employeeDao.countUnfulfilledShift(employeeIdToCheck);
+        return (openCount != null && openCount > 0);
+    }
+
 }

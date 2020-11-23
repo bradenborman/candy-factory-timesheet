@@ -44,7 +44,11 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
       });
       if (res.status === 200) location.reload();
     } catch (err) {
-      alert("ERROR");
+      const { data } = err.response;
+      if (typeof data === "string") {
+        alert(data);
+      }
+      setCallInProgress(false);
     }
   };
 

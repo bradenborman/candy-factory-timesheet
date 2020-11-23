@@ -12,11 +12,11 @@ export const RosterSelection: React.FC<IRosterSelectionProps> = (
   props: IRosterSelectionProps
 ) => {
   return (
-    <span
+    <div
       onClick={() => props.setSelected(props.person.personId)}
       className={classNames("rosterSelectionName", { active: props.selected })}
     >
       {props.person.name}
-    </span>
+    </div>
   );
 };

@@ -40,4 +40,10 @@ public class EmployeeDao {
         MapSqlParameterSource params = SqlParamHelperUtility.getStandardShiftActionParams(request);
         namedParameterJdbcTemplate.update(END_SHIFT, params);
     }
+
+    public Integer countUnfulfilledShift(int empId) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("empId", empId);
+        return namedParameterJdbcTemplate.queryForObject(COUNT_UN_FULL_FILLED_SHIFTS, params, Integer.class);
+    }
 }
