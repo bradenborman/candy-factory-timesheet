@@ -6,7 +6,10 @@ import cftimesheet.models.ShiftDetails;
 import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
+import cftimesheet.validators.ValidationRouter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +21,19 @@ public class ApiController {
     EmailSendingService emailSendingService;
     DataRetrievalService dataRetrievalService;
     ShiftManager shiftManager;
+    ValidationRouter validationRouter;
 
-    public ApiController(EmailSendingService emailSendingService, DataRetrievalService dataRetrievalService, ShiftManager shiftManager) {
+    public ApiController(EmailSendingService emailSendingService, DataRetrievalService dataRetrievalService,
+                         ShiftManager shiftManager, ValidationRouter validationRouter) {
         this.emailSendingService = emailSendingService;
         this.dataRetrievalService = dataRetrievalService;
         this.shiftManager = shiftManager;
+        this.validationRouter = validationRouter;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(validationRouter);
     }
 
     @GetMapping("/email")
@@ -43,7 +54,7 @@ public class ApiController {
     }
 
     @PostMapping("shift-action")
-    public ResponseEntity<Void> newShiftAction(@RequestBody ChangeShiftRequest request) {
+    public ResponseEntity<Void> newShiftAction(@Validated @RequestBody ChangeShiftRequest request) {
         shiftManager.newShiftAction(request);
         return ResponseEntity.ok().build();
     }

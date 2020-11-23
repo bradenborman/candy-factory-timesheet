@@ -39,6 +39,7 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
       const res: any = await axios.post(`/api/shift-action`, {
         personId: activeIdSelected,
         clockTime: formatTime(new Date()),
+        shiftId: -1,
         shiftAction: "START"
       });
       if (res.status === 200) location.reload();
