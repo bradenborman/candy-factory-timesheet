@@ -69,4 +69,4 @@ public class ApiController {
         return ResponseEntity.ok().build();
     }
 
-}status
+}
