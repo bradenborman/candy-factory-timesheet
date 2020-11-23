@@ -3,6 +3,7 @@ import axios from "axios";
 import { RosterSelection } from "./rosterselection";
 import Employee from "../../models/employee";
 import { formatTime } from "../../utilities/datehelper";
+import classNames from "classnames";
 
 require("./newshiftmodal.scss");
 
@@ -12,10 +13,15 @@ export interface INewShiftModalProps {
   closeModal: (close: boolean) => void;
 }
 
+// TODO change to render on bool and not class names
 export const NewShiftModal: React.FC<INewShiftModalProps> = (
   props: INewShiftModalProps
 ) => {
   const [activeIdSelected, setActiveIdSelected] = useState<number | null>();
+
+  const [newPersonModeActive, setNewPersonModeActive] = useState<boolean>(
+    false
+  );
 
   const [callInProgress, setCallInProgress] = useState<boolean>(false);
 
@@ -52,9 +58,60 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     }
   };
 
-  const handleClose = () => {
+  const handleModalClose = () => {
+    setNewPersonModeActive(false);
     setActiveIdSelected(null);
     props.closeModal(false);
+  };
+
+  const getAddPersonInputs = (): JSX.Element => {
+    return (
+      <div
+        id="employeeInputsArea"
+        className={classNames("section", { hidden: !newPersonModeActive })}
+      >
+        <p>
+          <u>Please Enter All Fields</u>
+        </p>
+        <form>
+          <label>Name:</label> <input type="phone" name="phoneNumber" />
+          <label>Phone Number:</label> <input />
+          <label>Email:</label> <input />
+          <label>Address:</label> <input />
+          <button type="submit">Create Employee</button>
+        </form>
+      </div>
+    );
+  };
+
+  const getRosterSelections_Default = (): JSX.Element => {
+    return (
+      <div
+        id="nameSelectionArea"
+        className={classNames("section", { hidden: newPersonModeActive })}
+      >
+        <p>
+          <u>Please select your name:</u>
+        </p>
+        {getRosterSelections()}
+        <div className="button-wrapper">
+          <button
+            disabled={activeIdSelected == null}
+            id="addSelectedBtn"
+            onClick={() => addEmployeeToNewShift()}
+          >
+            {callInProgress ? "Updating..." : "Start Shift"}
+          </button>
+        </div>
+        <u>Or dont see your name? </u>
+        <button
+          id="newEmployeeBtn"
+          onClick={() => setNewPersonModeActive(true)}
+        >
+          New Person
+        </button>
+      </div>
+    );
   };
 
   const getModal = (): JSX.Element => {
@@ -63,23 +120,12 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
         <div id="addEmployeeModal">
           <div id="activeSection">
             <h2>New Shift - Sign on</h2>
-            <p>
-              <u>Please select your name:</u>
-            </p>
-            {getRosterSelections()}
+            {getRosterSelections_Default()}
+            {getAddPersonInputs()}
             <div className="button-wrapper">
-              <button
-                disabled={activeIdSelected == null}
-                id="addSelectedBtn"
-                onClick={() => addEmployeeToNewShift()}
-              >
-                {callInProgress ? "Updating..." : "Start Shift"}
+              <button id="closeBtn" onClick={() => handleModalClose()}>
+                Cancel and Close
               </button>
-            </div>
-            <u>Or dont see your name? </u>
-            <button id="newEmployeeBtn">New Person</button>
-            <div className="button-wrapper">
-              <button onClick={() => handleClose()}>Cancel and Close</button>
             </div>
           </div>
         </div>

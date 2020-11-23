@@ -1,7 +1,9 @@
 package cftimesheet.controllers;
 
+import cftimesheet.managers.EmployeeManager;
 import cftimesheet.managers.ShiftManager;
 import cftimesheet.models.Employee;
+import cftimesheet.models.NewEmployeeRequest;
 import cftimesheet.models.ShiftDetails;
 import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.services.DataRetrievalService;
@@ -19,13 +21,15 @@ import java.util.List;
 public class ApiController {
 
     EmailSendingService emailSendingService;
+    EmployeeManager employeeManager;
     DataRetrievalService dataRetrievalService;
     ShiftManager shiftManager;
     ValidationRouter validationRouter;
 
-    public ApiController(EmailSendingService emailSendingService, DataRetrievalService dataRetrievalService,
-                         ShiftManager shiftManager, ValidationRouter validationRouter) {
+    public ApiController(EmailSendingService emailSendingService, EmployeeManager employeeManager,
+                         DataRetrievalService dataRetrievalService, ShiftManager shiftManager, ValidationRouter validationRouter) {
         this.emailSendingService = emailSendingService;
+        this.employeeManager = employeeManager;
         this.dataRetrievalService = dataRetrievalService;
         this.shiftManager = shiftManager;
         this.validationRouter = validationRouter;
@@ -53,10 +57,16 @@ public class ApiController {
         return ResponseEntity.ok(dataRetrievalService.fetchShiftsToday());
     }
 
+    @PostMapping("/employee:create")
+    public ResponseEntity<Void> createNewEmployee(NewEmployeeRequest newEmployeeRequest) {
+        employeeManager.createNewEmployee(newEmployeeRequest);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("shift-action")
     public ResponseEntity<Void> newShiftAction(@Validated @RequestBody ChangeShiftRequest request) {
         shiftManager.newShiftAction(request);
         return ResponseEntity.ok().build();
     }
 
-}
+}status
