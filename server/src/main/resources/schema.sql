@@ -28,12 +28,20 @@ values
 ('Sarah Smith', '5738268879', '7452 North Sreet Rd Columbia Mo', 'sarahhhhsimth@aol.com'),
 ('Alber Wilson', '5735551733', '2523 Chappel Hill Apt 23452 Columbia Mo', 'wilson234@gmail.com');
 
-
---insert into employee_shift
---(emp_id, shift_date, shift_clockIn)
---values (2, NOW(), '11:15 PM');
+insert into employee_shift
+(emp_id, shift_date, shift_clockIn)
+values (1, NOW(), '11:20 PM');
 
 
 insert into employee_shift
-(emp_id, shift_date)
-values (1, NOW());
+(emp_id, shift_date, shift_clockIn)
+values (2, NOW(), '10:15 PM');
+
+insert into employee_shift
+(emp_id, shift_date, shift_clockIn)
+values (2, NOW(), '11:15 PM');
+
+
+--insert into employee_shift
+--(emp_id, shift_date)
+--values (1, NOW());

@@ -7,7 +7,7 @@ require("./table.scss");
 export interface ITableRowProps {
   userdetails: ShiftDetails;
   updateClockIn: (number: number) => void;
-  updateClockOut: (number: number) => void;
+  updateClockOut: (empId: number, shiftId: number) => void;
 }
 
 export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
@@ -40,7 +40,12 @@ export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
     ) {
       return (
         <i
-          onDoubleClick={() => props.updateClockOut(props.userdetails.personId)}
+          onDoubleClick={() =>
+            props.updateClockOut(
+              props.userdetails.personId,
+              props.userdetails.shiftId
+            )
+          }
           className="fa fa-check-circle clockOut"
           aria-hidden="true"
         ></i>

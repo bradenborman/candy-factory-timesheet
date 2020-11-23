@@ -11,7 +11,7 @@ export interface ITimesheetProps {
   shifts: ShiftDetails[];
   roster: Employee[];
   updateClockIn: (number: number) => void;
-  updateClockOut: (number: number) => void;
+  updateClockOut: (empId: number, shiftId: number) => void;
   addEmployee?: () => void;
 }
 

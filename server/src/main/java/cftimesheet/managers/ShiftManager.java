@@ -19,7 +19,8 @@ public class ShiftManager {
     }
 
     public void newShiftAction(ChangeShiftRequest request) {
-        logger.info("Doing shiftAction of {} for: {} at {}", request.getShiftAction().name(), request.getPersonId(), request.getClockTime());
+        logger.info("Doing shiftAction of {} for: {} at {}. {} was the shift Id",
+                request.getShiftAction().name(), request.getPersonId(), request.getClockTime(), request.getShiftId());
 
         if (ShiftAction.START == request.getShiftAction())
             employeeDao.startShift(request);

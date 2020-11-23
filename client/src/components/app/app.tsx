@@ -61,10 +61,11 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     try {
       const res: any = await axios.post(`/api/shift-action`, {
         personId: employee.personId,
+        shiftId: employee.shiftId,
         clockTime: time,
         shiftAction: "END"
       });
-      if (res.status === 200) location.reload();
+      if (res.status === 200) console.log("Success call to clock out");
     } catch (err) {
       alert("ERROR");
     }
@@ -76,14 +77,18 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
         ? employee
         : setClockInTime(employee);
     });
+    console.log(newState);
     setEmployeesShifts(newState);
   };
 
-  const updateEmployeeClockedOutTime = (idToUpdate: number) => {
-    const newState: ShiftDetails[] = employeesShifts.map(employee => {
-      return employee.personId != idToUpdate
-        ? employee
-        : setClockOutTime(employee);
+  const updateEmployeeClockedOutTime = (
+    idToUpdate: number,
+    shiftId: number
+  ) => {
+    const newState: ShiftDetails[] = employeesShifts.map(shift => {
+      return shift.personId == idToUpdate && shift.shiftId == shiftId
+        ? setClockOutTime(shift)
+        : shift;
     });
     setEmployeesShifts(newState);
   };

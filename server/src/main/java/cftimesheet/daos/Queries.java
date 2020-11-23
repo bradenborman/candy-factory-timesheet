@@ -16,6 +16,6 @@ public interface Queries {
 
     String END_SHIFT = "UPDATE employee_shift " +
             "SET shift_clockOut = :clockTime " +
-            "WHERE emp_id = :personId;";
+            "WHERE emp_id = :personId AND shift_id = :shiftId;";
 
 }
