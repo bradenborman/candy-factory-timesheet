@@ -10,7 +10,7 @@
   #activeSection {
     border-radius: 20px;
     margin: auto;
-    margin-top: 15vh;
+    margin-top: 10vh;
     width: 40vw;
     background-color: white;
     padding: 20px;
@@ -19,11 +19,6 @@
     animation-fill-mode: forwards;
 
     box-shadow: rgba(0, 0, 0, 0.616) 5px 6px;
-
-    p {
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
 
     .rosterSelectionDiv {
       text-align: center;
@@ -51,7 +46,16 @@
 
     #addSelectedBtn {
       margin-top: 20px;
-      margin-bottom: 70px;
+      margin-bottom: 20px;
+    }
+
+    #newEmployeeBtn {
+      margin-top: 10px;
+      display: block;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     .inputs {
@@ -62,7 +66,6 @@
       text-align: center;
 
       button {
-        cursor: pointer;
         width: 130px;
         margin: 10px;
         padding: 10px;

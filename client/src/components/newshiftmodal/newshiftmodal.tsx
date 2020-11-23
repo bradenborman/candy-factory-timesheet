@@ -52,6 +52,11 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     }
   };
 
+  const handleClose = () => {
+    setActiveIdSelected(null);
+    props.closeModal(false);
+  };
+
   const getModal = (): JSX.Element => {
     if (props.show) {
       return (
@@ -62,22 +67,19 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
               <u>Please select your name:</u>
             </p>
             {getRosterSelections()}
-            <p>
-              <div className="button-wrapper">
-                <button
-                  disabled={activeIdSelected == null}
-                  id="addSelectedBtn"
-                  onClick={() => addEmployeeToNewShift()}
-                >
-                  {callInProgress ? "Updating..." : "Start Shift"}
-                </button>
-              </div>
-              <u>Or dont see your name? </u>
-            </p>
             <div className="button-wrapper">
-              <button onClick={() => props.closeModal(false)}>
-                Cancel and Close
+              <button
+                disabled={activeIdSelected == null}
+                id="addSelectedBtn"
+                onClick={() => addEmployeeToNewShift()}
+              >
+                {callInProgress ? "Updating..." : "Start Shift"}
               </button>
+            </div>
+            <u>Or dont see your name? </u>
+            <button id="newEmployeeBtn">New Person</button>
+            <div className="button-wrapper">
+              <button onClick={() => handleClose()}>Cancel and Close</button>
             </div>
           </div>
         </div>
