@@ -51,8 +51,23 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 
   const setClockOutTime = (employee: ShiftDetails) => {
     console.log("Making call to update Clock out time");
-    employee.clockOutTime = formatTime(new Date());
+    const clockOutTime: string = formatTime(new Date());
+    employee.clockOutTime = clockOutTime;
+    callForClockout(employee, clockOutTime);
     return employee;
+  };
+
+  const callForClockout = async (employee: ShiftDetails, time: string) => {
+    try {
+      const res: any = await axios.post(`/api/shift-action`, {
+        personId: employee.personId,
+        clockTime: time,
+        shiftAction: "END"
+      });
+      if (res.status === 200) location.reload();
+    } catch (err) {
+      alert("ERROR");
+    }
   };
 
   const updateEmployeeClockedInTime = (idToUpdate: number) => {

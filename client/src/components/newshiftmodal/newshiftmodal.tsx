@@ -36,9 +36,10 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
   const addEmployeeToNewShift = async () => {
     setCallInProgress(true);
     try {
-      const res: any = await axios.post(`/api/start-shift`, {
+      const res: any = await axios.post(`/api/shift-action`, {
         personId: activeIdSelected,
-        clockInTime: formatTime(new Date())
+        clockTime: formatTime(new Date()),
+        shiftAction: "START"
       });
       if (res.status === 200) location.reload();
     } catch (err) {

@@ -12,6 +12,10 @@ public interface Queries {
 
     String START_SHIFT = "INSERT INTO employee_shift " +
             "(emp_id, shift_date, shift_clockIn) " +
-            "VALUES (:personId, NOW(), :clockInTime)";
+            "VALUES (:personId, NOW(), :clockTime)";
+
+    String END_SHIFT = "UPDATE employee_shift " +
+            "SET shift_clockOut = :clockTime " +
+            "WHERE emp_id = :personId;";
 
 }

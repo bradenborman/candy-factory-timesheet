@@ -2,8 +2,10 @@ package cftimesheet.daos;
 
 import cftimesheet.daos.dbmappers.EmployeeRowMapper;
 import cftimesheet.daos.dbmappers.ShiftDetailsMapper;
+import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.models.Employee;
 import cftimesheet.models.ShiftDetails;
+import cftimesheet.utilities.SqlParamHelperUtility;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -29,11 +31,13 @@ public class EmployeeDao {
         return namedParameterJdbcTemplate.query(SELECT_TODAY_SHIFTS, new ShiftDetailsMapper());
     }
 
-    public void startShift(int id, String time) {
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("personId", id);
-        params.addValue("clockInTime", time);
+    public void startShift(ChangeShiftRequest request) {
+        MapSqlParameterSource params = SqlParamHelperUtility.getStandardShiftActionParams(request);
         namedParameterJdbcTemplate.update(START_SHIFT, params);
     }
 
+    public void endShift(ChangeShiftRequest request) {
+        MapSqlParameterSource params = SqlParamHelperUtility.getStandardShiftActionParams(request);
+        namedParameterJdbcTemplate.update(END_SHIFT, params);
+    }
 }

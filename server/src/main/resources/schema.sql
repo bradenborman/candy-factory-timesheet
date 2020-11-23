@@ -29,9 +29,9 @@ values
 ('Alber Wilson', '5735551733', '2523 Chappel Hill Apt 23452 Columbia Mo', 'wilson234@gmail.com');
 
 
-insert into employee_shift
-(emp_id, shift_date, shift_clockIn)
-values (2, NOW(), '11:15 PM');
+--insert into employee_shift
+--(emp_id, shift_date, shift_clockIn)
+--values (2, NOW(), '11:15 PM');
 
 
 insert into employee_shift

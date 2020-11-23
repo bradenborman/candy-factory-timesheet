@@ -3,7 +3,7 @@ package cftimesheet.controllers;
 import cftimesheet.managers.ShiftManager;
 import cftimesheet.models.Employee;
 import cftimesheet.models.ShiftDetails;
-import cftimesheet.models.StartNewShiftRequest;
+import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +42,9 @@ public class ApiController {
         return ResponseEntity.ok(dataRetrievalService.fetchShiftsToday());
     }
 
-    @PostMapping("start-shift")
-    public ResponseEntity<Void> startNewShift(@RequestBody StartNewShiftRequest request) {
-        shiftManager.startNewShiftByEmployeeId(request.getPersonId(), request.getClockInTime());
+    @PostMapping("shift-action")
+    public ResponseEntity<Void> newShiftAction(@RequestBody ChangeShiftRequest request) {
+        shiftManager.newShiftAction(request);
         return ResponseEntity.ok().build();
     }
 
