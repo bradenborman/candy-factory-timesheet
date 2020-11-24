@@ -13,7 +13,6 @@ export interface INewShiftModalProps {
   closeModal: (close: boolean) => void;
 }
 
-// TODO change to render on bool and not class names
 export const NewShiftModal: React.FC<INewShiftModalProps> = (
   props: INewShiftModalProps
 ) => {
@@ -24,20 +23,6 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
   );
 
   const [callInProgress, setCallInProgress] = useState<boolean>(false);
-
-  const getRosterSelections = (): JSX.Element => {
-    const rosterSelections = props.roster.map((person, index) => {
-      return (
-        <RosterSelection
-          setSelected={setActiveIdSelected}
-          key={index}
-          selected={activeIdSelected == person.personId}
-          person={person}
-        />
-      );
-    });
-    return <div className="rosterSelectionDiv">{rosterSelections}</div>;
-  };
 
   const addEmployeeToNewShift = async () => {
     setCallInProgress(true);
@@ -65,35 +50,64 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
   };
 
   const getAddPersonInputs = (): JSX.Element => {
+    const handleSubmitNewEmployee = (e: any) => {
+      e.preventDefault();
+      alert("Need to call still lol");
+    };
+
     return (
-      <div
-        id="employeeInputsArea"
-        className={classNames("section", { hidden: !newPersonModeActive })}
-      >
+      <div id="employeeInputsArea" className="section">
         <p>
           <u>Please Enter All Fields</u>
         </p>
-        <form>
-          <label>Name:</label> <input type="phone" name="phoneNumber" />
-          <label>Phone Number:</label> <input />
-          <label>Email:</label> <input />
-          <label>Address:</label> <input />
-          <button type="submit">Create Employee</button>
+        <form onSubmit={e => handleSubmitNewEmployee(e)}>
+          <div id="wrapper">
+            <input type="text" placeholder=" " required />
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder=" "
+              id="phone"
+              name="phone"
+              required
+            />{" "}
+            {/* pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" */}
+            <label>Phone Number</label>
+            <input type="email" placeholder=" " required />
+            <label>Email Adress</label>
+            <input type="text" placeholder=" " required />
+            <label>Mailing Adress</label>
+          </div>
+          <br />
+          <button id="submitEmpBtn" type="submit">
+            Create Employee
+          </button>
         </form>
       </div>
     );
   };
 
-  const getRosterSelections_Default = (): JSX.Element => {
+  const getRosterSelections = (): JSX.Element => {
+    const getRosterSelectionsDivs = (): JSX.Element => {
+      const rosterSelections = props.roster.map((person, index) => {
+        return (
+          <RosterSelection
+            setSelected={setActiveIdSelected}
+            key={index}
+            selected={activeIdSelected == person.personId}
+            person={person}
+          />
+        );
+      });
+      return <div className="rosterSelectionDiv">{rosterSelections}</div>;
+    };
+
     return (
-      <div
-        id="nameSelectionArea"
-        className={classNames("section", { hidden: newPersonModeActive })}
-      >
+      <div id="nameSelectionArea" className="section">
         <p>
           <u>Please select your name:</u>
         </p>
-        {getRosterSelections()}
+        {getRosterSelectionsDivs()}
         <div className="button-wrapper">
           <button
             disabled={activeIdSelected == null}
@@ -120,8 +134,7 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
         <div id="addEmployeeModal">
           <div id="activeSection">
             <h2>New Shift - Sign on</h2>
-            {getRosterSelections_Default()}
-            {getAddPersonInputs()}
+            {newPersonModeActive ? getAddPersonInputs() : getRosterSelections()}
             <div className="button-wrapper">
               <button id="closeBtn" onClick={() => handleModalClose()}>
                 Cancel and Close

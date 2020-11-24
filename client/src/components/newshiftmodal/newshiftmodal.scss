@@ -20,20 +20,67 @@
 
     box-shadow: rgba(0, 0, 0, 0.616) 5px 6px;
 
-    .section {
-      &.hidden {
-        display: none;
-      }
-    }
-
     #employeeInputsArea {
       form {
-        margin-top: 50px;
-        font-size: 1.4em;
-        input {
-          display: block;
-          min-width: 200px;
-          margin-bottom: 25px;
+        text-align: center;
+
+        #wrapper {
+          text-align: left;
+          display: inline-block;
+          margin-top: 20px;
+          font-size: 1.4em;
+          input,
+          label {
+            font-family: arial;
+            font-size: 16px;
+            line-height: 20px;
+          }
+          input {
+            display: block;
+            outline: none;
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 4px;
+            margin-top: 20px;
+            background-color: #f3f3f3;
+            color: #444;
+            transition: background-color 0.25s ease;
+            & + label {
+              position: relative;
+              top: -30px;
+              left: 5px;
+              color: #ccc;
+              pointer-events: none;
+              transition: all 0.25s ease;
+            }
+
+            &:focus,
+            &:not(:placeholder-shown),
+            &:-webkit-autofill {
+              background-color: #fff;
+              & + label {
+                top: -60px;
+                left: 0px;
+                color: #999;
+              }
+            }
+          }
+          input:invalid {
+            box-shadow: rgba(255, 0, 0, 0.486) 2px 1px;
+            & + label {
+              font-style: italic;
+              font-weight: bold;
+            }
+          }
+          input:valid {
+            box-shadow: rgba(72, 255, 0, 0.24) 1px 2px;
+          }
+        }
+
+        #submitEmpBtn:valid {
+          margin-top: 30px;
+          padding: 5px;
+          font-size: 1.3em;
         }
       }
     }
