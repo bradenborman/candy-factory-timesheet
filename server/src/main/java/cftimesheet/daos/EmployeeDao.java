@@ -4,6 +4,7 @@ import cftimesheet.daos.dbmappers.EmployeeRowMapper;
 import cftimesheet.daos.dbmappers.ShiftDetailsMapper;
 import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.models.Employee;
+import cftimesheet.models.NewEmployeeRequest;
 import cftimesheet.models.ShiftDetails;
 import cftimesheet.utilities.SqlParamHelperUtility;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -39,6 +40,11 @@ public class EmployeeDao {
     public void endShift(ChangeShiftRequest request) {
         MapSqlParameterSource params = SqlParamHelperUtility.getStandardShiftActionParams(request);
         namedParameterJdbcTemplate.update(END_SHIFT, params);
+    }
+
+    public void createNewEmployee(NewEmployeeRequest request) {
+        MapSqlParameterSource params = SqlParamHelperUtility.getStandardAddEmployeeParams(request);
+        namedParameterJdbcTemplate.update(CREATE_NEW_EMPLOYEE, params);
     }
 
     public Integer countUnfulfilledShift(int empId) {

@@ -22,6 +22,11 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     false
   );
 
+  const [personNameInput, setPersonNameInput] = useState<string>(null);
+  const [phoneInput, setPhoneInput] = useState<string>("");
+  const [emailInput, setEmailInput] = useState<string>("");
+  const [addressInput, setAddressInput] = useState<string>("");
+
   const [callInProgress, setCallInProgress] = useState<boolean>(false);
 
   const addEmployeeToNewShift = async () => {
@@ -43,6 +48,25 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     }
   };
 
+  const addEmployeeToRoster = async () => {
+    setCallInProgress(true);
+    try {
+      const res: any = await axios.post(`/api/employee:create`, {
+        employeeName: personNameInput,
+        phoneNumber: phoneInput,
+        email: emailInput,
+        address: addressInput
+      });
+      if (res.status === 200) location.reload();
+    } catch (err) {
+      const { data } = err.response;
+      if (typeof data === "string") {
+        alert(data);
+      }
+      setCallInProgress(false);
+    }
+  };
+
   const handleModalClose = () => {
     setNewPersonModeActive(false);
     setActiveIdSelected(null);
@@ -52,7 +76,7 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
   const getAddPersonInputs = (): JSX.Element => {
     const handleSubmitNewEmployee = (e: any) => {
       e.preventDefault();
-      alert("Need to call still lol");
+      addEmployeeToRoster();
     };
 
     return (
@@ -62,20 +86,43 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
         </p>
         <form onSubmit={e => handleSubmitNewEmployee(e)}>
           <div id="wrapper">
-            <input type="text" placeholder=" " required />
-            <label>Full Name</label>
             <input
               type="text"
+              value={personNameInput}
               placeholder=" "
-              id="phone"
-              name="phone"
+              onChange={e => setPersonNameInput(e.target.value)}
               required
-            />{" "}
-            {/* pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" */}
+            />
+            <label>Full Name</label>
+            {/*  */}
+
+            <input
+              type="text"
+              value={phoneInput}
+              placeholder=" "
+              onChange={e => setPhoneInput(e.target.value)}
+              required
+            />
             <label>Phone Number</label>
-            <input type="email" placeholder=" " required />
+            {/*  */}
+
+            <input
+              type="email"
+              value={emailInput}
+              placeholder=" "
+              onChange={e => setEmailInput(e.target.value)}
+              required
+            />
             <label>Email Adress</label>
-            <input type="text" placeholder=" " required />
+            {/*  */}
+
+            <input
+              type="text"
+              value={addressInput}
+              placeholder=" "
+              onChange={e => setAddressInput(e.target.value)}
+              required
+            />
             <label>Mailing Adress</label>
           </div>
           <br />

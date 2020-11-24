@@ -58,7 +58,7 @@ public class ApiController {
     }
 
     @PostMapping("/employee:create")
-    public ResponseEntity<Void> createNewEmployee(@RequestBody NewEmployeeRequest newEmployeeRequest) {
+    public ResponseEntity<Void> createNewEmployee(@Validated @RequestBody NewEmployeeRequest newEmployeeRequest) {
         employeeManager.createNewEmployee(newEmployeeRequest);
         return ResponseEntity.ok().build();
     }

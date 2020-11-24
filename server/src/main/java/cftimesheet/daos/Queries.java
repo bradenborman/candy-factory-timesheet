@@ -14,6 +14,10 @@ public interface Queries {
             "(emp_id, shift_date, shift_clockIn) " +
             "VALUES (:personId, NOW(), :clockTime)";
 
+    String CREATE_NEW_EMPLOYEE = "INSERT INTO valentines_seasonal_help " +
+            "(emp_name, emp_phone, emp_address, emp_email) " +
+            "VALUES (:fullName, :phoneNumber, :address, :email)";
+
     String END_SHIFT = "UPDATE employee_shift " +
             "SET shift_clockOut = :clockTime " +
             "WHERE emp_id = :personId AND shift_id = :shiftId;";
