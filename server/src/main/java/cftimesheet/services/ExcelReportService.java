@@ -75,10 +75,4 @@ public class ExcelReportService {
         }
     }
 
-
-    private boolean doesQualifyForReport() {
-        return false;
-    }
-
-
 }

@@ -32,7 +32,7 @@ public class TimeWorkedUtility {
             );
 
             logger.info("Time worked: {} Hours and {} Mins.", timeWorked.getHours(), timeWorked.getMinutes());
-            return timeWorked.getMinutes() + "Hrs " + timeWorked.getMinutes() + "mins";
+            return timeWorked.getHours() + "Hrs " + timeWorked.getMinutes() + "mins";
         }
         return "";
     }
