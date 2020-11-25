@@ -9,7 +9,7 @@
       padding-left: 10px;
       padding-bottom: 10px;
       &.emp-info {
-        width: 80%;
+        min-width: 250px;
       }
     }
     td {
@@ -33,13 +33,13 @@
             font-weight: bold;
           }
         }
-        &.email {
-          margin: left;
-        }
-        &.address {
-          text-align: center;
-          max-width: 230px;
-        }
+        // &.email {
+        //   margin: left;
+        // }
+        // &.address {
+        //   text-align: center;
+        //   max-width: 230px;
+        // }
       }
 
       i {

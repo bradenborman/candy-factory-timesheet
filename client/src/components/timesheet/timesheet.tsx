@@ -36,19 +36,30 @@ export const Timesheet: React.FC<ITimesheetProps> = (
 
   return (
     <div className="time-sheet-wrapper">
-      <div className="time-sheet">
-        <h2>Valentines Help</h2>
-        <br />
-        <h6>{new Date().toDateString()}</h6>
-        <div id="sheetControls">
-          <button
-            className="newRow"
-            onClick={() => setAddNewShiftModalActive(true)}
-          >
-            New Shift
-          </button>
+      <div className="time-sheet-paper">
+        <div className="header">
+          <h2>Valentines Help</h2>
+          <br />
+          <h6>{new Date().toDateString()}</h6>
         </div>
-        <TimeSheetTable>{mapEmployees()}</TimeSheetTable>
+        <div className="main-wrapper">
+          <div className="instructions">
+            <div id="sheetControls">
+              <button
+                className="newRow"
+                onClick={() => setAddNewShiftModalActive(true)}
+              >
+                New Shift
+              </button>
+            </div>
+            {/* <h3>How to:</h3>
+            <p><i>Clock In:</i> Please click "New Shift".</p>
+            <p>Clock Out: Double click the checkmark on your row.</p> */}
+          </div>
+          <div className="table-wrapper">
+            <TimeSheetTable>{mapEmployees()}</TimeSheetTable>
+          </div>
+        </div>
       </div>
       <NewShiftModal
         roster={props.roster}

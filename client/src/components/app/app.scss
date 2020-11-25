@@ -1,7 +1,9 @@
-body, html {
-    margin: 0px;
-    font-family: "Happy Monkey";
-    background-image: url("/img/cool-background.png"); 
-    // need to find a better background that stretches better
-    background-size: cover;
+body,
+html {
+  margin: 0px;
+  font-family: "Happy Monkey";
+  background-image: url("/img/cool-background.png");
+  box-sizing: border-box;
+  background-size: cover;
+  overflow: hidden;
 }

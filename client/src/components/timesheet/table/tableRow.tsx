@@ -63,8 +63,8 @@ export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
           <br />
           {formatPhoneNumber(props.userdetails.phoneNumber)}
         </div>
-        <div className="email">{props.userdetails.email}</div>
-        <div className="address">{props.userdetails.address}</div>
+        {/* <div className="email">{props.userdetails.email}</div>
+        <div className="address">{props.userdetails.address}</div> */}
       </td>
       <td>{getClockInDetails()}</td>
       <td>{getClockOutDetails()}</td>
