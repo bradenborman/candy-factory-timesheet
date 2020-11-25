@@ -40,12 +40,6 @@ public class ApiController {
         binder.addValidators(validationRouter);
     }
 
-    @GetMapping("/email")
-    public ResponseEntity<String> sendTestEmail() {
-        emailSendingService.sendTestEmail();
-        return ResponseEntity.ok("Email Sent");
-    }
-
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllActiveEmployees() {
         List<Employee> results = dataRetrievalService.getAllActiveEmployees();

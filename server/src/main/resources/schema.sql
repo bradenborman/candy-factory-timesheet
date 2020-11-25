@@ -25,6 +25,7 @@ insert into valentines_seasonal_help
 (emp_name, emp_phone, emp_address, emp_email)
 values
 ('Braden Borman', '5738261903', '3601 West Broadway Apt 21102 Columbia Mo', 'bradenborman00@gmail.com'),
+('Carter Atkinson', '3216549877', '', ''),
 ('Sarah Smith', '5738268879', '7452 North Sreet Rd Columbia Mo', 'sarahhhhsimth@aol.com'),
 ('Michelle Knox', '5769843156', '69 South Tarkiln Hill Ave. Depew, NY 14043', 'man@texasaol.com'),
 ('Dominic Hamilton', '7892345611', '7807 Sycamore Drive Trenton, NJ 08610', 'dmaha.li.733@reicono.gq'),
