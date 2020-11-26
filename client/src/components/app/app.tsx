@@ -43,12 +43,6 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     }
   };
 
-  const setClockInTime = (employee: ShiftDetails) => {
-    console.log("Making call to update Clock in time");
-    employee.clockInTime = formatTime(new Date());
-    return employee;
-  };
-
   const setClockOutTime = (employee: ShiftDetails) => {
     console.log("Making call to update Clock out time");
     const clockOutTime: string = formatTime(new Date());
@@ -71,16 +65,6 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     }
   };
 
-  const updateEmployeeClockedInTime = (idToUpdate: number) => {
-    const newState: ShiftDetails[] = employeesShifts.map(employee => {
-      return employee.personId != idToUpdate
-        ? employee
-        : setClockInTime(employee);
-    });
-    console.log(newState);
-    setEmployeesShifts(newState);
-  };
-
   const updateEmployeeClockedOutTime = (
     idToUpdate: number,
     shiftId: number
@@ -93,14 +77,20 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     setEmployeesShifts(newState);
   };
 
+  const deleteShiftByShiftId = (idToUpdate: number, shiftId: number) => {
+    const reallyDelete: boolean = confirm(
+      "Are you sure you want to delete? You cannot undo action but you can start a new shift."
+    );
+  };
+
   return (
     <div className="app-wrapper">
       <Navbar />
       <Timesheet
         roster={employeeRoster}
         shifts={employeesShifts}
-        updateClockIn={updateEmployeeClockedInTime}
         updateClockOut={updateEmployeeClockedOutTime}
+        deleteShift={deleteShiftByShiftId}
       />
     </div>
   );

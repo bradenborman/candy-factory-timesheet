@@ -23,7 +23,6 @@
         vertical-align: middle;
         padding: 10px;
         margin: 0px 10px 0px 10px;
-        font-size: 0.8em;
 
         &.name-phone {
           float: left;
@@ -33,13 +32,6 @@
             font-weight: bold;
           }
         }
-        // &.email {
-        //   margin: left;
-        // }
-        // &.address {
-        //   text-align: center;
-        //   max-width: 230px;
-        // }
       }
 
       i {
@@ -55,13 +47,45 @@
         }
       }
       i:hover {
-        font-size: 1.7em;
-        &.clockIn {
-          color: rgb(32, 184, 32);
-        }
         &.clockOut {
+          font-size: 2em;
+          color: green;
+        }
+      }
+    }
+
+    td.clockInTd {
+      position: relative;
+      font-size: 1, 2em;
+      .deleteRowDiv {
+        transition: all 0s;
+        visibility: hidden;
+        position: absolute;
+        top: 5px;
+        left: -50px;
+        width: 140px;
+        padding: 8px;
+        border-radius: 5px;
+
+        // Prevent Text to be selected on double click
+        user-select: none; /* standard syntax */
+        -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+        -moz-user-select: none; /* mozilla browsers */
+        -khtml-user-select: none; /* webkit (konqueror) browsers */
+        -ms-user-select: none; /* IE10+ */
+
+        .fa-exclamation-circle {
           color: red;
         }
+      }
+    }
+
+    td.clockInTd:hover {
+      .deleteRowDiv {
+        background-color: white;
+        border: 1px solid;
+        cursor: pointer;
+        visibility: visible;
       }
     }
   }

@@ -6,28 +6,30 @@ require("./table.scss");
 
 export interface ITableRowProps {
   userdetails: ShiftDetails;
-  updateClockIn: (number: number) => void;
   updateClockOut: (empId: number, shiftId: number) => void;
+  deleteShift: (empId: number, shiftId: number) => void;
 }
 
 export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
-  const getClockInDetails = (): JSX.Element => {
-    if (
-      props.userdetails.clockInTime != null &&
-      props.userdetails.clockInTime != ""
-    ) {
-      return <span>{props.userdetails.clockInTime}</span>;
-    } else {
-      return (
-        <i
-          onDoubleClick={() => props.updateClockIn(props.userdetails.personId)}
-          className="fa fa-play clockIn"
-          aria-hidden="true"
-        ></i>
-      );
-    }
+  const getClockInDetails = (): JSX.Element | JSX.Element => {
+    return (
+      <div>
+        <span>{props.userdetails.clockInTime}</span>
+        <div
+          onDoubleClick={() =>
+            props.deleteShift(
+              props.userdetails.personId,
+              props.userdetails.shiftId
+            )
+          }
+          className="deleteRowDiv"
+        >
+          <i className="fa fa-exclamation-circle" aria-hidden="true"></i> Double
+          Click Me To Delete Row
+        </div>
+      </div>
+    );
   };
-
   const getClockOutDetails = (): JSX.Element => {
     if (
       props.userdetails.clockOutTime != null &&
@@ -63,10 +65,8 @@ export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
           <br />
           {formatPhoneNumber(props.userdetails.phoneNumber)}
         </div>
-        {/* <div className="email">{props.userdetails.email}</div>
-        <div className="address">{props.userdetails.address}</div> */}
       </td>
-      <td>{getClockInDetails()}</td>
+      <td className="clockInTd">{getClockInDetails()}</td>
       <td>{getClockOutDetails()}</td>
     </tr>
   );

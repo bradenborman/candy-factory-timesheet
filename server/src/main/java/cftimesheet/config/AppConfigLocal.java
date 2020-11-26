@@ -16,11 +16,17 @@ import java.util.List;
 
 import static cftimesheet.models.ExcelReportHeaders.*;
 
-@Profile({"!local"})
+@Profile({"local"})
 @Configuration
-public class AppConfig {
+public class AppConfigLocal {
 
-    private final Logger logger = LoggerFactory.getLogger(AppConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(AppConfigLocal.class);
+
+    public AppConfigLocal() {
+        logger.info("LOCAL APP CONFIG TAKING EFFECT");
+        logger.info("CRON JOB SCHEDULED FOR EVERY 5 MINS");
+    }
+
 
     @Autowired
     EmailSendingService emailSendingService;
@@ -28,7 +34,7 @@ public class AppConfig {
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    @Scheduled(cron = "0 30 20 * * ?") //8:30 PM
+    @Scheduled(cron = "0 */5 * ? * *") // Every 5 minutes
     public void sendEightPmReportReal() {
         logger.info("Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();

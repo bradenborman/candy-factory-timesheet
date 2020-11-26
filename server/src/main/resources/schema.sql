@@ -36,27 +36,25 @@ insert into employee_shift
 (emp_id, shift_date, shift_clockIn)
 values (1, NOW(), '8:20 AM');
 
---insert into employee_shift
---(emp_id, shift_date, shift_clockIn, shift_clockOut)
---values
---(1, NOW(), '8:20 AM', '4:20 PM'),
---(2, NOW(), '8:20 AM', '4:20 PM'),
---(3, NOW(), '8:20 AM', '4:20 PM'),
---(4, NOW(), '8:20 AM', '4:20 PM'),
---(5, NOW(), '8:20 AM', '4:20 PM'),
---(6, NOW(), '8:20 AM', '4:20 PM'),
---(1, NOW(), '7:20 PM', null),
---(1, NOW(), '8:20 AM', '4:20 PM'),
---(2, NOW(), '8:20 AM', '4:20 PM'),
---(3, NOW(), '8:20 AM', '4:20 PM'),
---(4, NOW(), '8:20 AM', '4:20 PM'),
---(5, NOW(), '8:20 AM', '4:20 PM'),
---(6, NOW(), '8:20 AM', '4:20 PM'),
---(1, NOW(), '7:20 PM', null);
-
 insert into employee_shift
-(emp_id, shift_date, shift_clockIn)
-values (2, NOW(), '10:15 AM');
+(emp_id, shift_date, shift_clockIn, shift_clockOut)
+values
+(1, NOW(), '8:20 AM', '4:20 PM'),
+(2, NOW(), '8:20 AM', '4:20 PM'),
+(3, NOW(), '8:20 AM', '4:20 PM'),
+(4, NOW(), '8:20 AM', null),
+(5, NOW(), '8:20 AM', '4:20 PM'),
+(6, NOW(), '8:20 AM', '4:20 PM'),
+(1, NOW(), '7:20 PM', null),
+(2, NOW(), '8:20 AM', '4:20 PM'),
+(3, NOW(), '8:20 AM', '4:20 PM'),
+(5, NOW(), '8:20 AM', null),
+(6, NOW(), '8:20 AM', '4:20 PM'),
+(1, NOW(), '7:20 PM', null);
+
+--insert into employee_shift
+--(emp_id, shift_date, shift_clockIn)
+--values (2, NOW(), '10:15 AM');
 
 --insert into employee_shift
 --(emp_id, shift_date, shift_clockIn)

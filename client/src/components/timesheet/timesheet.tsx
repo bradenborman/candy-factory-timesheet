@@ -10,8 +10,8 @@ require("./timesheet.scss");
 export interface ITimesheetProps {
   shifts: ShiftDetails[];
   roster: Employee[];
-  updateClockIn: (number: number) => void;
   updateClockOut: (empId: number, shiftId: number) => void;
+  deleteShift: (empId: number, shiftId: number) => void;
   addEmployee?: () => void;
 }
 
@@ -23,12 +23,13 @@ export const Timesheet: React.FC<ITimesheetProps> = (
   );
 
   const mapEmployees = () => {
-    return props.shifts.map((emp: ShiftDetails) => {
+    return props.shifts.map((emp: ShiftDetails, index: number) => {
       return (
         <TableRow
+          key={index}
           userdetails={emp}
           updateClockOut={props.updateClockOut}
-          updateClockIn={props.updateClockIn}
+          deleteShift={props.deleteShift}
         ></TableRow>
       );
     });
@@ -52,9 +53,6 @@ export const Timesheet: React.FC<ITimesheetProps> = (
                 New Shift
               </button>
             </div>
-            {/* <h3>How to:</h3>
-            <p><i>Clock In:</i> Please click "New Shift".</p>
-            <p>Clock Out: Double click the checkmark on your row.</p> */}
           </div>
           <div className="table-wrapper">
             <TimeSheetTable>{mapEmployees()}</TimeSheetTable>
