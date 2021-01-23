@@ -14,10 +14,30 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
   const [employeesShifts, setEmployeesShifts] = useState<ShiftDetails[]>([]);
   const [employeeRoster, setEmployeeRoster] = useState<Employee[]>([]);
 
+  const [adminMode, setAdminMode] = useState<boolean>(false);
+
+  let keyMap: any = {};
+
   useEffect(() => {
     fetchShiftsToday();
     fetchEmployeeRoster();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyDownListener);
+    return () => {
+      window.removeEventListener("keydown", keyDownListener);
+    };
+  }, []);
+
+  const keyDownListener = (e: any): void => {
+    keyMap[e.key] = e.type === "keydown";
+    if (e.shiftKey && e.ctrlKey && keyMap["A"]) {
+      // alert("TOGGLE ADMIN MODE")
+      setAdminMode(!adminMode);
+    }
+    keyMap = {};
+  };
 
   const fetchShiftsToday = async () => {
     try {
@@ -77,20 +97,14 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     setEmployeesShifts(newState);
   };
 
-  const deleteShiftByShiftId = (idToUpdate: number, shiftId: number) => {
-    const reallyDelete: boolean = confirm(
-      "Are you sure you want to delete? You cannot undo action but you can start a new shift."
-    );
-  };
-
   return (
     <div className="app-wrapper">
       <Navbar />
       <Timesheet
+        adminMode={adminMode}
         roster={employeeRoster}
         shifts={employeesShifts}
         updateClockOut={updateEmployeeClockedOutTime}
-        deleteShift={deleteShiftByShiftId}
       />
     </div>
   );

@@ -27,16 +27,17 @@ public class AppConfigLocal {
         logger.info("CRON JOB SCHEDULED FOR EVERY 5 MINS");
     }
 
-
     @Autowired
     EmailSendingService emailSendingService;
 
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    @Scheduled(cron = "0 */5 * ? * *") // Every 5 minutes
+    boolean alreadySendEmail = false;
+
+    @Scheduled(cron = "0 */1 * ? * *") // Every 5 minutes
     public void sendEightPmReportReal() {
-        logger.info("Task Hit");
+        logger.info("sendEightPmReportReal Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();
         List<ShiftDetails> shiftsWorkedToday = dataRetrievalService.fetchShiftsToday();
         ByteArrayResource excelFile = excelReportService
@@ -47,7 +48,10 @@ public class AppConfigLocal {
                 .autoSizeColumns()
                 .toFile();
 
-        emailSendingService.sendTestEmail(excelFile);
+        if(!alreadySendEmail)
+            emailSendingService.sendTestEmail(excelFile);
+
+        alreadySendEmail = true;
     }
 
 }

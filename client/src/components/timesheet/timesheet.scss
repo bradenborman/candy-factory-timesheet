@@ -6,10 +6,9 @@
   .time-sheet-paper {
     border: 2px solid rgb(185, 185, 223);
     margin: auto;
-    margin-top: 20px;
     margin-bottom: 200px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1050px;
     padding: 5px;
     background-color: white;
     padding: 10px;
@@ -35,7 +34,7 @@
 
       .instructions {
         display: inline-block;
-        flex: 33%;
+        flex: 200px;
 
         #sheetControls {
           margin-top: 70px;
@@ -49,13 +48,23 @@
             box-shadow: #b43246 2px 2px;
           }
         }
+
+        #adminTxtStatus {
+          text-align: center;
+          margin-top: 70px;
+          h2 {
+            color: darkblue;
+            font-size: 2em;
+            font-weight: bold;
+          }
+        }
       }
 
       .table-wrapper {
         padding: 20px;
         display: inline-block;
         flex: 66%;
-        max-height: 65vh;
+        max-height: 70vh;
         overflow-y: scroll;
       }
     }

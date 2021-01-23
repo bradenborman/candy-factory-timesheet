@@ -123,7 +123,7 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
               onChange={e => setAddressInput(e.target.value)}
               required
             />
-            <label>Mailing Adress</label>
+            <label>Mailing Adress or Venmo Username</label>
           </div>
           <br />
           <button id="submitEmpBtn" type="submit">

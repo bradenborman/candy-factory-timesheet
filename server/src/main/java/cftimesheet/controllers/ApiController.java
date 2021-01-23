@@ -63,4 +63,10 @@ public class ApiController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/shift/{empId}/{shiftId}")
+    public ResponseEntity<Void> deleteShift(@PathVariable String empId, @PathVariable String shiftId) {
+        shiftManager.deleteShift(shiftId, empId);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -8,10 +8,10 @@ import { NewShiftModal } from "../newshiftmodal/newshiftmodal";
 require("./timesheet.scss");
 
 export interface ITimesheetProps {
+  adminMode: boolean;
   shifts: ShiftDetails[];
   roster: Employee[];
   updateClockOut: (empId: number, shiftId: number) => void;
-  deleteShift: (empId: number, shiftId: number) => void;
   addEmployee?: () => void;
 }
 
@@ -26,13 +26,24 @@ export const Timesheet: React.FC<ITimesheetProps> = (
     return props.shifts.map((emp: ShiftDetails, index: number) => {
       return (
         <TableRow
+          adminMode={props.adminMode}
           key={index}
           userdetails={emp}
           updateClockOut={props.updateClockOut}
-          deleteShift={props.deleteShift}
         ></TableRow>
       );
     });
+  };
+
+  const getAdminStatusTxt = (): JSX.Element => {
+    if (props.adminMode) {
+      return (
+        <div>
+          <h2>Admin Mode</h2>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -53,6 +64,7 @@ export const Timesheet: React.FC<ITimesheetProps> = (
                 New Shift
               </button>
             </div>
+            <div id="adminTxtStatus">{getAdminStatusTxt()}</div>
           </div>
           <div className="table-wrapper">
             <TimeSheetTable>{mapEmployees()}</TimeSheetTable>

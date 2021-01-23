@@ -28,7 +28,7 @@ public class AppConfig {
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    @Scheduled(cron = "0 30 20 * * ?") //8:30 PM
+    @Scheduled(cron = "0 30 21 * * ?") //9:30 PM
     public void sendEightPmReportReal() {
         logger.info("Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();

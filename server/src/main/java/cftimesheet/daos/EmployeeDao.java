@@ -52,4 +52,11 @@ public class EmployeeDao {
         params.addValue("empId", empId);
         return namedParameterJdbcTemplate.queryForObject(COUNT_UN_FULL_FILLED_SHIFTS, params, Integer.class);
     }
+
+    public void deleteShift(String shiftToDelete, String empId) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("shiftToDelete", shiftToDelete);
+        params.addValue("empId", empId);
+        namedParameterJdbcTemplate.update(DELETE_SHIFT_BY_SHIFT_ID_PERSON_ID, params);
+    }
 }

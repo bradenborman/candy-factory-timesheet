@@ -25,4 +25,6 @@ public interface Queries {
     String COUNT_UN_FULL_FILLED_SHIFTS = "SELECT count(emp_id) FROM employee_shift WHERE shift_clockOut is null AND emp_id = :empId";
 
 
+    String DELETE_SHIFT_BY_SHIFT_ID_PERSON_ID = "DELETE FROM employee_shift WHERE shift_id = :shiftToDelete AND emp_id = :empId";
+
 }

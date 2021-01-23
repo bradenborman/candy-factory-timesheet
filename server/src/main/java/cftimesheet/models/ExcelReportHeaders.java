@@ -7,7 +7,7 @@ public enum ExcelReportHeaders {
     NAME("Employee Name"),
     PHONE("Phone Number"),
     EMAIL("Email"),
-    ADDRESS("Address"),
+    ADDRESS("Address/Venmo"),
     CLOCK_IN("Clocked In"),
     CLOCK_OUT("Clocked Out"),
     TOTAL_TIME_WORKED("Total Time Worked (Hours)");

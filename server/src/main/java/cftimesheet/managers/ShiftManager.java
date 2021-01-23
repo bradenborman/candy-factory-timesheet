@@ -30,4 +30,9 @@ public class ShiftManager {
 
     }
 
+    public void deleteShift(String shiftToDelete, String empId) {
+        logger.info("Removing Shift Id: {}. Person Id: {}", shiftToDelete, empId);
+        employeeDao.deleteShift(shiftToDelete, empId);
+    }
+
 }
