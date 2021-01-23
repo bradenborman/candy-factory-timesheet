@@ -33,9 +33,7 @@ public class AppConfigLocal {
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    boolean alreadySendEmail = false;
-
-    @Scheduled(cron = "0 */1 * ? * *") // Every 5 minutes
+    @Scheduled(cron = "0 */5 * ? * *") // Every 5 minutes
     public void sendEightPmReportReal() {
         logger.info("sendEightPmReportReal Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();
@@ -48,10 +46,7 @@ public class AppConfigLocal {
                 .autoSizeColumns()
                 .toFile();
 
-        if(!alreadySendEmail)
-            emailSendingService.sendTestEmail(excelFile);
-
-        alreadySendEmail = true;
+        emailSendingService.sendTestEmail(excelFile);
     }
 
 }

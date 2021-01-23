@@ -33,24 +33,13 @@ values
 ('Alber Wilson', '5735551733', '2523 Chappel Hill Apt 23452 Columbia Mo', 'wilson234@gmail.com');
 
 insert into employee_shift
-(emp_id, shift_date, shift_clockIn)
-values (1, NOW(), '8:20 AM');
-
-insert into employee_shift
 (emp_id, shift_date, shift_clockIn, shift_clockOut)
 values
-(1, NOW(), '8:20 AM', '4:20 PM'),
-(2, NOW(), '8:20 AM', '4:20 PM'),
-(3, NOW(), '8:20 AM', '4:20 PM'),
-(4, NOW(), '8:20 AM', null),
-(5, NOW(), '8:20 AM', '4:20 PM'),
-(6, NOW(), '8:20 AM', '4:20 PM'),
-(1, NOW(), '7:20 PM', null),
-(2, NOW(), '8:20 AM', '4:20 PM'),
-(3, NOW(), '8:20 AM', '4:20 PM'),
-(5, NOW(), '8:20 AM', null),
-(6, NOW(), '8:20 AM', '4:20 PM'),
-(1, NOW(), '7:20 PM', null);
+(2, NOW(), '9:00 AM', '4:20 PM'),
+(1, NOW(), '7:20 AM', '12:20 PM'),
+(4, NOW(), '10:00 AM', null),
+(3, NOW(), '10:00 AM', '3:40 PM'),
+(5, NOW(), '11:20 AM', null);
 
 --insert into employee_shift
 --(emp_id, shift_date, shift_clockIn)

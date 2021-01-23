@@ -22,6 +22,11 @@ public class AppConfig {
 
     private final Logger logger = LoggerFactory.getLogger(AppConfig.class);
 
+    public AppConfig() {
+        logger.info("APP CONFIG TAKING EFFECT");
+        logger.info("CRON JOB SCHEDULED FOR 9:30PM");
+    }
+
     @Autowired
     EmailSendingService emailSendingService;
 
