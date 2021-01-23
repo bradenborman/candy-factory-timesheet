@@ -40,6 +40,16 @@ export const Timesheet: React.FC<ITimesheetProps> = (
       return (
         <div>
           <h2>Admin Mode</h2>
+          <p
+            onClick={e => {
+              window.open(`/api/download-excel-time-sheet`);
+            }}
+            title="Click to download today's timesheet so far."
+          >
+            <i className="fa fa-file" />
+            <br />
+            Download File
+          </p>
         </div>
       );
     }

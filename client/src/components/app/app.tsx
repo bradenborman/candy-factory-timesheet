@@ -33,7 +33,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
   const keyDownListener = (e: any): void => {
     keyMap[e.key] = e.type === "keydown";
     if (e.shiftKey && e.ctrlKey && keyMap["A"]) {
-      // alert("TOGGLE ADMIN MODE")
+      // alert("TOGGLE ADMIN MODE") WHY THIS NO WORK
       setAdminMode(!adminMode);
     }
     keyMap = {};

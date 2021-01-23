@@ -2,19 +2,29 @@ package cftimesheet.controllers;
 
 import cftimesheet.managers.EmployeeManager;
 import cftimesheet.managers.ShiftManager;
+import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.models.Employee;
 import cftimesheet.models.NewEmployeeRequest;
 import cftimesheet.models.ShiftDetails;
-import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
+import cftimesheet.services.ExcelReportService;
 import cftimesheet.validators.ValidationRouter;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
+
+import static cftimesheet.models.ExcelReportHeaders.*;
 
 @RestController
 @RequestMapping("/api")
@@ -67,6 +77,26 @@ public class ApiController {
     public ResponseEntity<Void> deleteShift(@PathVariable String empId, @PathVariable String shiftId) {
         shiftManager.deleteShift(shiftId, empId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value="/download-excel-time-sheet")
+    public HttpEntity<ByteArrayResource> createExcelWithTaskConfigurations() throws IOException {
+        ExcelReportService excelService = new ExcelReportService();
+        List<ShiftDetails> shiftsWorkedToday = dataRetrievalService.fetchShiftsToday();
+
+        ByteArrayResource excelFile = excelService
+                .setShiftsWorked(shiftsWorkedToday)
+                .withStartingWorkbook()
+                .withHeaders(NAME, PHONE, EMAIL, ADDRESS, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
+                .createRowsFromShiftsWorked()
+                .autoSizeColumns()
+                .toFile();
+
+        HttpHeaders header = new HttpHeaders();
+        String date = LocalDate.now().toString().toLowerCase(Locale.ROOT);
+        header.setContentType(new MediaType("application", "force-download"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + date + "-timesheet.xlsx");
+        return new HttpEntity<>(excelFile, header);
     }
 
 }
