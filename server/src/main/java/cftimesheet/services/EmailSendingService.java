@@ -27,7 +27,7 @@ public class EmailSendingService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(receivingAddress);
             helper.setSubject("Today's Timesheet");
-            helper.setText("<h2>Today's Timesheet</h2>", true);
+            helper.setText("<p></p>", true);
             helper.addAttachment("todaystimesheet.xlsx", file);
         } catch (MessagingException e) {
             e.printStackTrace();
