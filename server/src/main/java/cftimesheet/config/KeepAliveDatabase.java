@@ -14,7 +14,7 @@ public class KeepAliveDatabase {
     }
 
     //Hopefully runs to keep database alive
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0/15 * * * * ?")
     public void updateNextTeamPlayingAndOddsQuick() {
         employeeDao.fetchAllActiveEmployees();
     }

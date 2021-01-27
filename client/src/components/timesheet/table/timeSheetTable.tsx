@@ -15,7 +15,10 @@ export const TimeSheetTable: React.FC<ITableProps> = (props: ITableProps) => {
             <i className="fa fa-user" aria-hidden="true"></i> Employee
           </th>
           <th>Time-In</th>
-          <th>Time-Out</th>
+          <th>
+            Time-Out
+            <span className="tip">Double click checkmark</span>
+          </th>
         </tr>
       </thead>
       <tbody>{props.children}</tbody>

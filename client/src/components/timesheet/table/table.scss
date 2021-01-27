@@ -5,11 +5,20 @@
 
   tr {
     th {
+      position: relative;
       font-size: 1.2em;
       padding-left: 10px;
       padding-bottom: 10px;
       &.emp-info {
         min-width: 250px;
+      }
+
+      span.tip {
+        position: absolute;
+        display: block;
+        top: -20px;
+        left: 0px;
+        font-size: 11px;
       }
     }
     td {
