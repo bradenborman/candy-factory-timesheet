@@ -1,52 +1,39 @@
 package cftimesheet.config;
 
-import cftimesheet.models.ShiftDetails;
-import cftimesheet.services.DataRetrievalService;
-import cftimesheet.services.EmailSendingService;
-import cftimesheet.services.ExcelReportService;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.List;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-import static cftimesheet.models.ExcelReportHeaders.*;
-
-@Profile({"!local"})
 @Configuration
 public class AppConfig {
 
     private final Logger logger = LoggerFactory.getLogger(AppConfig.class);
 
     public AppConfig() {
-        logger.info("APP CONFIG TAKING EFFECT");
-        logger.info("CRON JOB SCHEDULED FOR 9:30PM");
+        logger.info("Setting Up database config");
     }
 
-    @Autowired
-    EmailSendingService emailSendingService;
+    @Bean(name = "dataSource")
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
-    @Autowired
-    DataRetrievalService dataRetrievalService;
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 
-    @Scheduled(cron = "0 30 21 * * ?") //9:30 PM
-    public void sendEightPmReportReal() {
-        logger.info("Task Hit");
-        ExcelReportService excelReportService = new ExcelReportService();
-        List<ShiftDetails> shiftsWorkedToday = dataRetrievalService.fetchShiftsToday();
-        ByteArrayResource excelFile = excelReportService
-                .setShiftsWorked(shiftsWorkedToday)
-                .withStartingWorkbook()
-                .withHeaders(NAME, PHONE, EMAIL, ADDRESS, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
-                .createRowsFromShiftsWorked()
-                .autoSizeColumns()
-                .toFile();
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
 
-        emailSendingService.sendTestEmail(excelFile);
+        logger.info("URL: {} | Username: {} | Password: {}", dbUrl, username, password);
+
+        return basicDataSource;
     }
 
 }

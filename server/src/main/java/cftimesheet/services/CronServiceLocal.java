@@ -1,30 +1,26 @@
-package cftimesheet.config;
+package cftimesheet.services;
 
 import cftimesheet.models.ShiftDetails;
-import cftimesheet.services.DataRetrievalService;
-import cftimesheet.services.EmailSendingService;
-import cftimesheet.services.ExcelReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static cftimesheet.models.ExcelReportHeaders.*;
 
 @Profile({"local"})
-@Configuration
-public class AppConfigLocal {
+@Service
+public class CronServiceLocal {
 
-    private final Logger logger = LoggerFactory.getLogger(AppConfigLocal.class);
+    private final Logger logger = LoggerFactory.getLogger(CronServiceLocal.class);
 
-    public AppConfigLocal() {
-        logger.info("LOCAL APP CONFIG TAKING EFFECT");
-        logger.info("CRON JOB SCHEDULED FOR EVERY 5 MINS");
+    public CronServiceLocal() {
+        logger.info("Setting up cron service. Every 5 mins");
     }
 
     @Autowired

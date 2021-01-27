@@ -20,7 +20,8 @@ public class SqlParamHelperUtility {
 
     public static MapSqlParameterSource getStandardAddEmployeeParams(NewEmployeeRequest request) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("fullName", request.getEmployeeName());
+        params.addValue("firstName", request.getEmployeeName()); //TODO fix
+        params.addValue("lastName", request.getEmployeeName());
         params.addValue("phoneNumber", request.getPhoneNumber());
         params.addValue("email", request.getEmail());
         params.addValue("address", request.getAddress());
