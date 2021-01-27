@@ -63,9 +63,10 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     }
   };
 
-  const setClockOutTime = (employee: ShiftDetails) => {
+  const setClockOutTime = (employee: ShiftDetails, timeOut?: string) => {
     console.log("Making call to update Clock out time");
-    const clockOutTime: string = formatTime(new Date());
+    const clockOutTime: string =
+      timeOut != null ? timeOut : formatTime(new Date());
     employee.clockOutTime = clockOutTime;
     callForClockout(employee, clockOutTime);
     return employee;
@@ -89,12 +90,26 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
     idToUpdate: number,
     shiftId: number
   ) => {
-    const newState: ShiftDetails[] = employeesShifts.map(shift => {
-      return shift.personId == idToUpdate && shift.shiftId == shiftId
-        ? setClockOutTime(shift)
-        : shift;
-    });
-    setEmployeesShifts(newState);
+    if (adminMode) {
+      const response = prompt(
+        "Admin mode Clockout -> Please enter a time: (XX:XX AM/PM)"
+      );
+      if (response != null && response != undefined) {
+        const newState: ShiftDetails[] = employeesShifts.map(shift => {
+          return shift.personId == idToUpdate && shift.shiftId == shiftId
+            ? setClockOutTime(shift, response)
+            : shift;
+        });
+        setEmployeesShifts(newState);
+      }
+    } else {
+      const newState: ShiftDetails[] = employeesShifts.map(shift => {
+        return shift.personId == idToUpdate && shift.shiftId == shiftId
+          ? setClockOutTime(shift)
+          : shift;
+      });
+      setEmployeesShifts(newState);
+    }
   };
 
   return (

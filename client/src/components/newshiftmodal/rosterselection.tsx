@@ -16,7 +16,7 @@ export const RosterSelection: React.FC<IRosterSelectionProps> = (
       onClick={() => props.setSelected(props.person.personId)}
       className={classNames("rosterSelectionName", { active: props.selected })}
     >
-      {props.person.name}
+      {props.person.lastName}, {props.person.firstName}
     </div>
   );
 };

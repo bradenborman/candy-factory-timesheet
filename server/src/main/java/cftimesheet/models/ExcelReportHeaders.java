@@ -10,7 +10,7 @@ public enum ExcelReportHeaders {
     ADDRESS("Address/Venmo"),
     CLOCK_IN("Clocked In"),
     CLOCK_OUT("Clocked Out"),
-    TOTAL_TIME_WORKED("Total Time Worked (Hours)");
+    TOTAL_TIME_WORKED("Total Time Worked");
 
     private String displayName;
 

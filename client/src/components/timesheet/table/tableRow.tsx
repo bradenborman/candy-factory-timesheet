@@ -104,7 +104,7 @@ export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
         </div>
       </td>
       <td className="clockInTd">{getClockInDetails()}</td>
-      <td>{getClockOutDetails()}</td>
+      <td className="clockOutTd">{getClockOutDetails()}</td>
     </tr>
   );
 };

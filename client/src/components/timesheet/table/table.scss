@@ -57,7 +57,10 @@
     td.clockInTd {
       position: relative;
       font-size: 1, 2em;
+      color: green;
+      font-weight: bold;
       .deleteRowDiv {
+        color: black;
         transition: all 0s;
         visibility: hidden;
         position: absolute;
@@ -86,6 +89,14 @@
         border: 1px solid;
         cursor: pointer;
         visibility: visible;
+      }
+    }
+
+    td.clockOutTd {
+      color: green;
+      font-weight: bold;
+      .fa-check-circle {
+        color: red;
       }
     }
   }
