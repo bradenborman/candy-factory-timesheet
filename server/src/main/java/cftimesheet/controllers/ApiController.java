@@ -61,6 +61,11 @@ public class ApiController {
         return ResponseEntity.ok(dataRetrievalService.fetchShiftsToday());
     }
 
+    @GetMapping("employee-data/{employeeId}")
+    public ResponseEntity<Employee> getEmployeeData(@PathVariable String employeeId) {
+        return ResponseEntity.ok(employeeManager.getEmployeeData(employeeId));
+    }
+
     @PostMapping("/employee:create")
     public ResponseEntity<Void> createNewEmployee(@Validated @RequestBody NewEmployeeRequest newEmployeeRequest) {
         employeeManager.createNewEmployee(newEmployeeRequest);

@@ -4,6 +4,8 @@ public interface Queries {
 
     String SELECT_EMPLOYEES = "SELECT * FROM valentines_seasonal_help ORDER BY emp_name_last";
 
+    String SELECT_EMPLOYEE = "SELECT * FROM valentines_seasonal_help WHERE emp_id = :empId";
+
     String SELECT_TODAY_SHIFTS = "SELECT * FROM EMPLOYEE_SHIFT " +
             "LEFT JOIN valentines_seasonal_help " +
             "ON " +

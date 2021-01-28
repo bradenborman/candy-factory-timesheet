@@ -29,7 +29,7 @@ public class CronServiceLocal {
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    @Scheduled(cron = "0 */5 * ? * *") // Every 5 minutes
+    @Scheduled(cron = "0 */30 * ? * *") // Every 5 minutes
     public void sendEightPmReportReal() {
         logger.info("sendEightPmReportReal Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();

@@ -5,6 +5,8 @@ import { Timesheet } from "../timesheet/timesheet";
 import { formatTime } from "../../utilities/datehelper";
 import ShiftDetails from "../../models/shiftDetials";
 import Employee from "../../models/employee";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { EditUser } from "../editUser/editUser";
 
 require("./app.scss");
 
@@ -57,6 +59,8 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
       if (res.data) {
         const response: Employee[] = res.data;
         setEmployeeRoster(response);
+        console.log("Roster");
+        console.log(response);
       }
     } catch (err) {
       console.error(err);
@@ -113,14 +117,21 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
   };
 
   return (
-    <div className="app-wrapper">
+    <Router>
       <Navbar />
-      <Timesheet
-        adminMode={adminMode}
-        roster={employeeRoster}
-        shifts={employeesShifts}
-        updateClockOut={updateEmployeeClockedOutTime}
-      />
-    </div>
+      <Switch>
+        <Route exact path={["/"]}>
+          <Timesheet
+            adminMode={adminMode}
+            roster={employeeRoster}
+            shifts={employeesShifts}
+            updateClockOut={updateEmployeeClockedOutTime}
+          />
+        </Route>
+        <Route exact path="/edit-user/:personId">
+          <EditUser />
+        </Route>
+      </Switch>
+    </Router>
   );
 };

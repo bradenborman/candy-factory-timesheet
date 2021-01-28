@@ -3,7 +3,6 @@ import axios from "axios";
 import { RosterSelection } from "./rosterselection";
 import Employee from "../../models/employee";
 import { formatTime } from "../../utilities/datehelper";
-import classNames from "classnames";
 
 require("./newshiftmodal.scss");
 

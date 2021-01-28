@@ -59,4 +59,10 @@ public class EmployeeDao {
         params.addValue("empId", empId);
         namedParameterJdbcTemplate.update(DELETE_SHIFT_BY_SHIFT_ID_PERSON_ID, params);
     }
+
+    public Employee getEmployeeData(String employeeId) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("empId", employeeId);
+        return namedParameterJdbcTemplate.queryForObject(SELECT_EMPLOYEE, params, new EmployeeRowMapper());
+    }
 }

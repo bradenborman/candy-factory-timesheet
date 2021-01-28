@@ -1,6 +1,7 @@
 package cftimesheet.managers;
 
 import cftimesheet.daos.EmployeeDao;
+import cftimesheet.models.Employee;
 import cftimesheet.models.NewEmployeeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,4 +23,7 @@ public class EmployeeManager {
         employeeDao.createNewEmployee(newEmployeeRequest);
     }
 
+    public Employee getEmployeeData(String employeeId) {
+       return employeeDao.getEmployeeData(employeeId);
+    }
 }
