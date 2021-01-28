@@ -2,7 +2,8 @@ package cftimesheet.models;
 
 public class NewEmployeeRequest {
 
-    private String employeeName;
+    private String firstName;
+    private String lastName;
     private String phoneNumber;
     private String email;
     private String address;
@@ -10,12 +11,36 @@ public class NewEmployeeRequest {
     private boolean startNewShift;
     private String startTime;
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isStartNewShift() {
+        return startNewShift;
+    }
+
+    public void setStartNewShift(boolean startNewShift) {
+        this.startNewShift = startNewShift;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getPhoneNumber() {

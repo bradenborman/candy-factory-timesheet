@@ -17,12 +17,12 @@ public interface Queries {
             "LEFT JOIN valentines_seasonal_help " +
             "ON " +
             "valentines_seasonal_help.emp_id= employee_shift.emp_id " +
-            "WHERE shift_date = CURDATE() " +
+            "WHERE shift_date = :today " +
             "ORDER BY shift_clockOut";
 
     String START_SHIFT = "INSERT INTO employee_shift " +
             "(emp_id, shift_date, shift_clockIn) " +
-            "VALUES (:personId, NOW(), :clockTime)";
+            "VALUES (:personId, :today, :clockTime)";
 
     String CREATE_NEW_EMPLOYEE = "INSERT INTO valentines_seasonal_help " +
             "(emp_name_first, emp_name_last, emp_phone, emp_address, emp_email) " +

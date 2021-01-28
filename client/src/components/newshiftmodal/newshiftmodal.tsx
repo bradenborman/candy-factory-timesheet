@@ -22,7 +22,8 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     false
   );
 
-  const [personNameInput, setPersonNameInput] = useState<string>(null);
+  const [firstName, setFirstName] = useState<string>(null);
+  const [lastName, setLastName] = useState<string>(null);
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [emailInput, setEmailInput] = useState<string>("");
   const [addressInput, setAddressInput] = useState<string>("");
@@ -52,7 +53,8 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
     setCallInProgress(true);
     try {
       const res: any = await axios.post(`/api/employee:create`, {
-        employeeName: personNameInput,
+        firstName: firstName,
+        lastName: lastName,
         phoneNumber: phoneInput,
         email: emailInput,
         address: addressInput
@@ -88,14 +90,22 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
           <div id="wrapper">
             <input
               type="text"
-              value={personNameInput}
+              value={firstName}
               placeholder=" "
-              onChange={e => setPersonNameInput(e.target.value)}
+              onChange={e => setFirstName(e.target.value)}
               required
             />
-            <label>Full Name</label>
+            <label>First Name</label>
             {/*  */}
-
+            <input
+              type="text"
+              value={lastName}
+              placeholder=" "
+              onChange={e => setLastName(e.target.value)}
+              required
+            />
+            <label>Last Name</label>
+            {/*  */}
             <input
               type="text"
               value={phoneInput}
@@ -123,7 +133,9 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
               onChange={e => setAddressInput(e.target.value)}
               required
             />
-            <label>Mailing Adress or Venmo Username</label>
+            <label>
+              Enter Either: <small>Mailing Address/Venmo/Paypal</small>
+            </label>
           </div>
           <br />
           <button id="submitEmpBtn" type="submit">

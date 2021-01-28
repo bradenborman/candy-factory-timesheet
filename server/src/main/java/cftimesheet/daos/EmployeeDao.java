@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.util.List;
 
 import static cftimesheet.daos.Queries.*;
@@ -26,7 +27,9 @@ public class EmployeeDao {
     }
 
     public List<ShiftDetails> fetchShiftsToday() {
-        return namedParameterJdbcTemplate.query(SELECT_TODAY_SHIFTS, new ShiftDetailsMapper());
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("today", new Date(System.currentTimeMillis()));
+        return namedParameterJdbcTemplate.query(SELECT_TODAY_SHIFTS, params, new ShiftDetailsMapper());
     }
 
     public void startShift(ChangeShiftRequest request) {

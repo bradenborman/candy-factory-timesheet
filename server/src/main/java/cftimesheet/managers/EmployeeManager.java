@@ -20,7 +20,7 @@ public class EmployeeManager {
     }
 
     public void createNewEmployee(NewEmployeeRequest newEmployeeRequest) {
-        logger.info("Creating new Employee: {}", newEmployeeRequest.getEmployeeName());
+        logger.info("Creating new Employee: {}", newEmployeeRequest.getFirstName());
         employeeDao.createNewEmployee(newEmployeeRequest);
     }
 
