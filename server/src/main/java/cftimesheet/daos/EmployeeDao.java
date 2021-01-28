@@ -2,10 +2,7 @@ package cftimesheet.daos;
 
 import cftimesheet.daos.dbmappers.EmployeeRowMapper;
 import cftimesheet.daos.dbmappers.ShiftDetailsMapper;
-import cftimesheet.models.ChangeShiftRequest;
-import cftimesheet.models.Employee;
-import cftimesheet.models.NewEmployeeRequest;
-import cftimesheet.models.ShiftDetails;
+import cftimesheet.models.*;
 import cftimesheet.utilities.SqlParamHelperUtility;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -64,5 +61,10 @@ public class EmployeeDao {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("empId", employeeId);
         return namedParameterJdbcTemplate.queryForObject(SELECT_EMPLOYEE, params, new EmployeeRowMapper());
+    }
+
+    public void updateEmployee(UpdateEmployeeRequest updateEmployeeRequest) {
+        MapSqlParameterSource params = SqlParamHelperUtility.updateEmployeeRequestParams(updateEmployeeRequest);
+        namedParameterJdbcTemplate.update(UPDATE_EMPLOYEE_DATA, params);
     }
 }

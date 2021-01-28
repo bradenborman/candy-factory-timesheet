@@ -3,6 +3,7 @@ import axios from "axios";
 import { RosterSelection } from "./rosterselection";
 import Employee from "../../models/employee";
 import { formatTime } from "../../utilities/datehelper";
+import classNames from "classnames";
 
 require("./newshiftmodal.scss");
 
@@ -152,6 +153,10 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
       <div id="nameSelectionArea" className="section">
         <p>
           <u>Please select your name:</u>
+          <br />
+          <span className={classNames("hint", { hidden: !activeIdSelected })}>
+            Right click to edit.
+          </span>
         </p>
         {getRosterSelectionsDivs()}
         <div className="button-wrapper">

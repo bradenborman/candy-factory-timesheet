@@ -2,10 +2,7 @@ package cftimesheet.controllers;
 
 import cftimesheet.managers.EmployeeManager;
 import cftimesheet.managers.ShiftManager;
-import cftimesheet.models.ChangeShiftRequest;
-import cftimesheet.models.Employee;
-import cftimesheet.models.NewEmployeeRequest;
-import cftimesheet.models.ShiftDetails;
+import cftimesheet.models.*;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
 import cftimesheet.services.ExcelReportService;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -45,10 +41,10 @@ public class ApiController {
         this.validationRouter = validationRouter;
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.addValidators(validationRouter);
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        binder.addValidators(validationRouter);
+//    }
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllActiveEmployees() {
@@ -64,6 +60,12 @@ public class ApiController {
     @GetMapping("employee-data/{employeeId}")
     public ResponseEntity<Employee> getEmployeeData(@PathVariable String employeeId) {
         return ResponseEntity.ok(employeeManager.getEmployeeData(employeeId));
+    }
+
+    @PostMapping("/update-employee-data")
+    public ResponseEntity<Void> updateEmployee(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
+        employeeManager.updateEmployee(updateEmployeeRequest);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/employee:create")

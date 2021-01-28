@@ -14,9 +14,8 @@ public class KeepAliveDatabase {
     }
 
     //Hopefully runs to keep database alive
-    @Scheduled(cron = "0/15 * * * * ?")
+    @Scheduled(cron = "0/25 * * * * ?")
     public void updateNextTeamPlayingAndOddsQuick() {
-        System.out.println("Calling to keep alive");
         employeeDao.fetchAllActiveEmployees();
     }
 

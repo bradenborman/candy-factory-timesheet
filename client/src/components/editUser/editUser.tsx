@@ -35,11 +35,30 @@ export const EditUser: React.FC<IEditUserProps> = (props: IEditUserProps) => {
     }
   };
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    let response = axios
+      .post("/api/update-employee-data", {
+        personId: personId,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        email: email,
+        address: address
+      })
+      .then(function(response) {
+        location.replace("/");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   const getInputs = (): JSX.Element => {
     if (firstName == null) return <h2>Loading...</h2>;
     return (
       <div id="personDetails">
-        <form action={"/update-employee-data/" + personId} method="post">
+        <form onSubmit={handleSubmit}>
           <div className="inputGroup">
             <label htmlFor="firstName">First Name:</label>
             <input

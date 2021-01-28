@@ -2,9 +2,14 @@ body,
 html {
   margin: 0px;
   font-family: "Happy Monkey";
-  background-image: url("/img/cool-background.png");
+  // background-image: url("/img/cool-background.png");
+  background: rgb(166, 206, 250);
+  background: radial-gradient(
+    circle,
+    rgba(166, 206, 250, 1) 45%,
+    rgba(89, 142, 200, 1) 79%
+  );
   box-sizing: border-box;
-  background-size: cover;
   overflow: hidden;
 }
 

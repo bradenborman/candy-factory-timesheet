@@ -49,7 +49,11 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
         setEmployeesShifts(response);
       }
     } catch (err) {
-      console.error(err);
+      const res: any = await axios.get(`/api/shifts:today`);
+      if (res.data) {
+        const response: ShiftDetails[] = res.data;
+        setEmployeesShifts(response);
+      }
     }
   };
 
@@ -64,6 +68,13 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
       }
     } catch (err) {
       console.error(err);
+      const res: any = await axios.get(`/api/employees`);
+      if (res.data) {
+        const response: Employee[] = res.data;
+        setEmployeeRoster(response);
+        console.log("Roster");
+        console.log(response);
+      }
     }
   };
 

@@ -23,9 +23,12 @@ export const RosterSelection: React.FC<IRosterSelectionProps> = (
   const getContextMenu = (): JSX.Element => {
     if (props.selected)
       return (
-        <ContextMenu allowedClasses={["active"]}>
+        <ContextMenu>
           <MenuItem action={editUser} iconClass="fa-pencil">
-            Edit User
+            Edit{" "}
+            {props.person.firstName +
+              " " +
+              props.person.lastName.substring(0, 1)}
           </MenuItem>
           <MenuSeparator />
           <MenuItem disabled iconClass="fa-trash">

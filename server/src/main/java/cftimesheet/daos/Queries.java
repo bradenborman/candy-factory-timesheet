@@ -6,6 +6,13 @@ public interface Queries {
 
     String SELECT_EMPLOYEE = "SELECT * FROM valentines_seasonal_help WHERE emp_id = :empId";
 
+
+    String UPDATE_EMPLOYEE_DATA = "UPDATE valentines_seasonal_help " +
+            "SET emp_name_first = :firstName, " +
+            "emp_name_last = :lastName, emp_phone = :phoneNumber, " +
+            "emp_address = :address, emp_email = :email " +
+            "WHERE emp_id = :empId";
+
     String SELECT_TODAY_SHIFTS = "SELECT * FROM EMPLOYEE_SHIFT " +
             "LEFT JOIN valentines_seasonal_help " +
             "ON " +

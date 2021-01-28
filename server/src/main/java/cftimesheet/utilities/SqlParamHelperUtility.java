@@ -2,6 +2,7 @@ package cftimesheet.utilities;
 
 import cftimesheet.models.ChangeShiftRequest;
 import cftimesheet.models.NewEmployeeRequest;
+import cftimesheet.models.UpdateEmployeeRequest;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 public class SqlParamHelperUtility {
@@ -22,6 +23,17 @@ public class SqlParamHelperUtility {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("firstName", request.getEmployeeName()); //TODO fix
         params.addValue("lastName", request.getEmployeeName());
+        params.addValue("phoneNumber", request.getPhoneNumber());
+        params.addValue("email", request.getEmail());
+        params.addValue("address", request.getAddress());
+        return params;
+    }
+
+    public static MapSqlParameterSource updateEmployeeRequestParams(UpdateEmployeeRequest request) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("empId", request.getPersonId());
+        params.addValue("firstName", request.getFirstName());
+        params.addValue("lastName", request.getLastName());
         params.addValue("phoneNumber", request.getPhoneNumber());
         params.addValue("email", request.getEmail());
         params.addValue("address", request.getAddress());
