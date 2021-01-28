@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class ViewController {
 
-    @RequestMapping({"", "/"})
+    @RequestMapping({"", "/", "/edit-user/**"})
     public String getCandyFactoryTimeSheetApplicationViews() {
         return "index";
     }
