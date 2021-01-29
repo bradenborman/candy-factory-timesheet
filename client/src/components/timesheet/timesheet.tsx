@@ -50,6 +50,14 @@ export const Timesheet: React.FC<ITimesheetProps> = (
             <br />
             Download File
           </p>
+          <button
+            id="leaveAdminBtn"
+            onClick={e => {
+              location.reload();
+            }}
+          >
+            Disable Admin Mode
+          </button>
         </div>
       );
     }

@@ -38,7 +38,7 @@ export const RosterSelection: React.FC<IRosterSelectionProps> = (
     const customClockIn: string = prompt(
       "Admin Clockin -> Please enter a time: (XX:XX AM/PM)"
     );
-    startShiftCall(customClockIn);
+    startShiftCall(customClockIn.toUpperCase());
   };
 
   const startShiftCall = async (customClockIn: string) => {

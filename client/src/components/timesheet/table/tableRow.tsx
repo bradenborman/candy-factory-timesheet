@@ -98,7 +98,9 @@ export const TableRow: React.FC<ITableRowProps> = (props: ITableRowProps) => {
     <tr>
       <td>
         <div className="name-phone">
-          <span className="name">{props.userdetails.name}</span>
+          <span className="name">
+            {props.userdetails.firstName + " " + props.userdetails.lastName}
+          </span>
           <br />
           {formatPhoneNumber(props.userdetails.phoneNumber)}
         </div>

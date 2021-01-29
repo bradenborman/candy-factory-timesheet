@@ -14,7 +14,7 @@
     border-radius: 20px;
     border: 2px solid rgb(185, 185, 223);
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 40vw;
     background-color: white;
     padding: 20px;
@@ -29,6 +29,7 @@
         text-align: center;
 
         #wrapper {
+          vertical-align: middle;
           text-align: left;
           display: inline-block;
           margin-top: 20px;
@@ -78,6 +79,44 @@
           }
           input:valid {
             box-shadow: rgba(72, 255, 0, 0.24) 1px 2px;
+          }
+        }
+        #wrapperRight {
+          display: inline-block;
+          margin-left: 20px;
+          height: 300px;
+          width: 45%;
+          max-width: 300px;
+          vertical-align: middle;
+          padding: 20px;
+
+          p {
+            font-weight: bold;
+          }
+
+          #paymentWrapper {
+            padding: 10px;
+            border: 1px solid rgb(175, 166, 166);
+            box-shadow: #3e4e5f 2px 1px;
+
+            label {
+              font-weight: bold;
+              font-style: italic;
+              font-family: arial;
+              font-size: 16px;
+              line-height: 20px;
+              display: block;
+              color: #999;
+              text-align: left;
+            }
+
+            input {
+              margin-top: 2px;
+              box-sizing: border-box;
+              padding: 4px;
+              width: 100%;
+              margin-bottom: 15px;
+            }
           }
         }
 

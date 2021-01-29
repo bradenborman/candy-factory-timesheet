@@ -37,7 +37,7 @@ public class CronServiceLocal {
         ByteArrayResource excelFile = excelReportService
                 .setShiftsWorked(shiftsWorkedToday)
                 .withStartingWorkbook()
-                .withHeaders(NAME, PHONE, EMAIL, ADDRESS, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
+                .withHeaders(L_NAME, F_NAME, PHONE, EMAIL, ADDRESS, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
                 .createRowsFromShiftsWorked()
                 .autoSizeColumns()
                 .toFile();

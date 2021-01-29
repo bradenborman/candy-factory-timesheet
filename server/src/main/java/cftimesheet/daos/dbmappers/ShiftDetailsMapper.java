@@ -12,12 +12,13 @@ public class ShiftDetailsMapper implements RowMapper<ShiftDetails> {
     public ShiftDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
         ShiftDetails details = new ShiftDetails();
         details.setPersonId(rs.getInt("emp_id"));
-        details.setName(rs.getString("emp_name_first") + " " + rs.getString("emp_name_last"));
-        details.setFirstName(rs.getString("emp_name_first")); //TODO fix
+        details.setFirstName(rs.getString("emp_name_first"));
         details.setLastName(rs.getString("emp_name_last"));
         details.setEmail(rs.getString("emp_email"));
         details.setPhoneNumber(rs.getString("emp_phone"));
         details.setAddress(rs.getString("emp_address"));
+        details.setPaypal(rs.getString("emp_paypal"));
+        details.setVenmo(rs.getString("emp_venmo"));
 
         details.setShiftId(rs.getInt("shift_id"));
         details.setClockInTime(rs.getString("shift_clockIn"));

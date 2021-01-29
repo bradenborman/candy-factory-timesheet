@@ -112,7 +112,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
       if (response != null && response != undefined) {
         const newState: ShiftDetails[] = employeesShifts.map(shift => {
           return shift.personId == idToUpdate && shift.shiftId == shiftId
-            ? setClockOutTime(shift, response)
+            ? setClockOutTime(shift, response.toUpperCase())
             : shift;
         });
         setEmployeesShifts(newState);

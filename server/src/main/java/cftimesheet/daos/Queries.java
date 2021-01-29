@@ -28,8 +28,8 @@ public interface Queries {
             "VALUES (:personId, :today, :clockTime)";
 
     String CREATE_NEW_EMPLOYEE = "INSERT INTO valentines_seasonal_help " +
-            "(emp_name_first, emp_name_last, emp_phone, emp_address, emp_email) " +
-            "VALUES (:firstName, :lastName, :phoneNumber, :address, :email)";
+            "(emp_name_first, emp_name_last, emp_phone, emp_address, emp_email, emp_paypal, emp_venmo) " +
+            "VALUES (:firstName, :lastName, :phoneNumber, :address, :email, :paypal, :venmo)";
 
     String END_SHIFT = "UPDATE employee_shift " +
             "SET shift_clockOut = :clockTime " +

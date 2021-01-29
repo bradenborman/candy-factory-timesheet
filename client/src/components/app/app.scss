@@ -13,6 +13,31 @@ html {
   overflow: hidden;
 }
 
+#leaveAdminBtn {
+  cursor: pointer;
+  position: absolute;
+  top: 1vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 10px;
+  font-size: 26px;
+  border: red 1px solid;
+  -webkit-animation: grow-shrink 1s ease-in-out infinite;
+  -moz-animation: grow-shrink 1s ease-in-out infinite;
+  animation: grow-shrink 1s ease-in-out infinite;
+}
+
+@keyframes grow-shrink {
+  from {
+    width: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

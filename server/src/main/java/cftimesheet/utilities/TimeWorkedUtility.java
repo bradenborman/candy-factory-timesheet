@@ -19,16 +19,24 @@ public class TimeWorkedUtility {
         return getTimeWorked(shiftDetails.getClockInTime(), shiftDetails.getClockOutTime());
     }
 
+    public static String getTimeWorkedTotalMins(ShiftDetails shiftDetails) {
+        return getTimeWorkedTotalMins(shiftDetails.getClockInTime(), shiftDetails.getClockOutTime());
+    }
+
+    public static LocalTime convertToLocalTime(String timeStr) {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendOptional(DateTimeFormatter.ofPattern("hh:mm a"))
+                .appendOptional(DateTimeFormatter.ofPattern("h:mm a"))
+                .toFormatter();
+        return LocalTime.parse(timeStr, formatter);
+    }
+
     public static String getTimeWorked(String clockInTime, String clockOutTime) {
         if ((clockInTime != null && !clockInTime.equals("")) && (clockOutTime != null && !clockOutTime.equals(""))) {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                    .appendOptional(DateTimeFormatter.ofPattern("hh:mm a"))
-                    .appendOptional(DateTimeFormatter.ofPattern("h:mm a"))
-                    .toFormatter();
 
             TimeWorkedBreakdown timeWorked = getTimeWorkedHours(
-                    LocalTime.parse(clockInTime, formatter),
-                    LocalTime.parse(clockOutTime, formatter)
+                    convertToLocalTime(clockInTime),
+                    convertToLocalTime(clockOutTime)
             );
 
             logger.info("Time worked: {} Hours and {} Mins.", timeWorked.getHours(), timeWorked.getMinutes());
@@ -45,5 +53,17 @@ public class TimeWorkedUtility {
         worked.setMinutes(remaining.toMinutes());
         return worked;
     }
+
+    public static String getTimeWorkedTotalMins(String clockInTime, String clockOutTime) {
+        if ((clockInTime != null && !clockInTime.equals("")) && (clockOutTime != null && !clockOutTime.equals(""))) {
+
+            LocalTime clockIn = convertToLocalTime(clockInTime);
+            LocalTime clockOut = convertToLocalTime(clockOutTime);
+            return String.valueOf(Duration.between(clockIn, clockOut).toMinutes());
+
+        }
+        return null;
+    }
+
 
 }

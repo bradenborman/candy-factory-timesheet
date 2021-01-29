@@ -38,6 +38,8 @@ public class SqlParamHelperUtility {
         params.addValue("phoneNumber", request.getPhoneNumber());
         params.addValue("email", request.getEmail());
         params.addValue("address", request.getAddress());
+        params.addValue("paypal", request.getPaypal());
+        params.addValue("venmo", request.getVenmo());
         return params;
     }
 

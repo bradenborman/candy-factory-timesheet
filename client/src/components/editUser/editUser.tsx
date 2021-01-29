@@ -12,7 +12,7 @@ export const EditUser: React.FC<IEditUserProps> = (props: IEditUserProps) => {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
   const [email, setEmail] = useState<string>();
-  const [address, setAddress] = useState<string>();
+  const [paymentMethod, setPaymentMethod] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<string>();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const EditUser: React.FC<IEditUserProps> = (props: IEditUserProps) => {
         setFirstName(response.firstName);
         setLastName(response.lastName);
         setEmail(response.email);
-        setAddress(response.address);
+        setPaymentMethod(response.address);
         setPhoneNumber(response.phoneNumber);
       }
     } catch (err) {
@@ -44,7 +44,7 @@ export const EditUser: React.FC<IEditUserProps> = (props: IEditUserProps) => {
         lastName: lastName,
         phoneNumber: phoneNumber,
         email: email,
-        address: address
+        address: paymentMethod
       })
       .then(function(response) {
         location.replace("/");
@@ -106,8 +106,8 @@ export const EditUser: React.FC<IEditUserProps> = (props: IEditUserProps) => {
               name="address"
               id="address"
               type="text"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
+              value={paymentMethod}
+              onChange={e => setPaymentMethod(e.target.value)}
             />
           </div>
           <br />

@@ -26,7 +26,10 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
   const [lastName, setLastName] = useState<string>(null);
   const [phoneInput, setPhoneInput] = useState<string>("");
   const [emailInput, setEmailInput] = useState<string>("");
+
   const [addressInput, setAddressInput] = useState<string>("");
+  const [paypalInput, setPaypalInput] = useState<string>("");
+  const [venmoInput, setVenmoInput] = useState<string>("");
 
   const [callInProgress, setCallInProgress] = useState<boolean>(false);
 
@@ -57,7 +60,9 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
         lastName: lastName,
         phoneNumber: phoneInput,
         email: emailInput,
-        address: addressInput
+        address: addressInput,
+        venmo: venmoInput,
+        paypal: paypalInput
       });
       if (res.status === 200) location.reload();
     } catch (err) {
@@ -115,27 +120,43 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
             />
             <label>Phone Number</label>
             {/*  */}
-
             <input
               type="email"
               value={emailInput}
               placeholder=" "
               onChange={e => setEmailInput(e.target.value)}
-              required
             />
-            <label>Email Adress</label>
-            {/*  */}
-
-            <input
-              type="text"
-              value={addressInput}
-              placeholder=" "
-              onChange={e => setAddressInput(e.target.value)}
-              required
-            />
-            <label>
-              Enter Either: <small>Mailing Address/Venmo/Paypal</small>
-            </label>
+            <label>Email Adress - Not required</label>
+          </div>
+          <div id="wrapperRight">
+            <p>Please enter one of the following:</p>
+            <div id="paymentWrapper">
+              <label>
+                <i className="fa fa-envelope" /> Mailing Address
+              </label>
+              <input
+                type="text"
+                value={addressInput}
+                placeholder=" "
+                onChange={e => setAddressInput(e.target.value)}
+              />
+              <label>
+                <i className="fa fa-paypal" /> Paypal username
+              </label>
+              <input
+                type="text"
+                value={paypalInput}
+                placeholder=" "
+                onChange={e => setPaypalInput(e.target.value)}
+              />
+              <label>Venmo username</label>
+              <input
+                type="text"
+                value={venmoInput}
+                placeholder=" "
+                onChange={e => setVenmoInput(e.target.value)}
+              />
+            </div>
           </div>
           <br />
           <button id="submitEmpBtn" type="submit">
@@ -166,9 +187,6 @@ export const NewShiftModal: React.FC<INewShiftModalProps> = (
         <p>
           <u>Please select your name:</u>
           <br />
-          <span className={classNames("hint", { hidden: !activeIdSelected })}>
-            Right click to edit.
-          </span>
         </p>
         {getRosterSelectionsDivs()}
         <div className="button-wrapper">

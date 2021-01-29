@@ -1,18 +1,18 @@
 package cftimesheet.controllers;
 
 import cftimesheet.managers.EmployeeManager;
-import cftimesheet.managers.ShiftManager;
-import cftimesheet.models.*;
+import cftimesheet.models.Employee;
+import cftimesheet.models.NewEmployeeRequest;
+import cftimesheet.models.ShiftDetails;
+import cftimesheet.models.UpdateEmployeeRequest;
 import cftimesheet.services.DataRetrievalService;
 import cftimesheet.services.EmailSendingService;
 import cftimesheet.services.ExcelReportService;
-import cftimesheet.validators.ValidationRouter;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -29,22 +29,13 @@ public class ApiController {
     EmailSendingService emailSendingService;
     EmployeeManager employeeManager;
     DataRetrievalService dataRetrievalService;
-    ShiftManager shiftManager;
-    ValidationRouter validationRouter;
 
     public ApiController(EmailSendingService emailSendingService, EmployeeManager employeeManager,
-                         DataRetrievalService dataRetrievalService, ShiftManager shiftManager, ValidationRouter validationRouter) {
+                         DataRetrievalService dataRetrievalService) {
         this.emailSendingService = emailSendingService;
         this.employeeManager = employeeManager;
         this.dataRetrievalService = dataRetrievalService;
-        this.shiftManager = shiftManager;
-        this.validationRouter = validationRouter;
     }
-
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        binder.addValidators(validationRouter);
-//    }
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllActiveEmployees() {
@@ -75,20 +66,8 @@ public class ApiController {
     }
 
     @PostMapping("/employee:create")
-    public ResponseEntity<Void> createNewEmployee(@Validated @RequestBody NewEmployeeRequest newEmployeeRequest) {
+    public ResponseEntity<Void> createNewEmployee(@RequestBody NewEmployeeRequest newEmployeeRequest) {
         employeeManager.createNewEmployee(newEmployeeRequest);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("shift-action")
-    public ResponseEntity<Void> newShiftAction(@Validated @RequestBody ChangeShiftRequest request) {
-        shiftManager.newShiftAction(request);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/shift/{empId}/{shiftId}")
-    public ResponseEntity<Void> deleteShift(@PathVariable String empId, @PathVariable String shiftId) {
-        shiftManager.deleteShift(shiftId, empId);
         return ResponseEntity.ok().build();
     }
 
@@ -100,7 +79,7 @@ public class ApiController {
         ByteArrayResource excelFile = excelService
                 .setShiftsWorked(shiftsWorkedToday)
                 .withStartingWorkbook()
-                .withHeaders(NAME, PHONE, EMAIL, ADDRESS, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
+                .withHeaders(L_NAME, F_NAME, PHONE, EMAIL, ADDRESS, VENMO, PAYPAL, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
                 .createRowsFromShiftsWorked()
                 .autoSizeColumns()
                 .toFile();

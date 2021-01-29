@@ -3,12 +3,13 @@ package cftimesheet.models;
 public class Employee {
 
     private int personId;
-    private String name; //REMOVE
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
     private String address;
+    private String venmo;
+    private String paypal;
 
     public int getPersonId() {
         return personId;
@@ -16,14 +17,6 @@ public class Employee {
 
     public void setPersonId(int personId) {
         this.personId = personId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getFirstName() {
@@ -64,5 +57,21 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getVenmo() {
+        return venmo;
+    }
+
+    public void setVenmo(String venmo) {
+        this.venmo = venmo;
+    }
+
+    public String getPaypal() {
+        return paypal;
+    }
+
+    public void setPaypal(String paypal) {
+        this.paypal = paypal;
     }
 }
