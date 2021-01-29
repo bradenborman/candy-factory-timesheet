@@ -62,6 +62,12 @@ public class ApiController {
         return ResponseEntity.ok(employeeManager.getEmployeeData(employeeId));
     }
 
+    @DeleteMapping("/user")
+    public ResponseEntity<Void> deleteUser(@RequestParam String personId) {
+        employeeManager.deleteUser(personId);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/update-employee-data")
     public ResponseEntity<Void> updateEmployee(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
         employeeManager.updateEmployee(updateEmployeeRequest);

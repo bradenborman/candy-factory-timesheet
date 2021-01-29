@@ -6,6 +6,9 @@ public interface Queries {
 
     String SELECT_EMPLOYEE = "SELECT * FROM valentines_seasonal_help WHERE emp_id = :empId";
 
+    String DELETE_EMPLOYEE = "DELETE FROM valentines_seasonal_help WHERE emp_id = :empId";
+
+    String DELETE_EMP_SHIFTS = "DELETE FROM employee_shift WHERE emp_id = :empId";
 
     String UPDATE_EMPLOYEE_DATA = "UPDATE valentines_seasonal_help " +
             "SET emp_name_first = :firstName, " +

@@ -70,4 +70,16 @@ public class EmployeeDao {
         MapSqlParameterSource params = SqlParamHelperUtility.updateEmployeeRequestParams(updateEmployeeRequest);
         namedParameterJdbcTemplate.update(UPDATE_EMPLOYEE_DATA, params);
     }
+
+    public void deleteShiftsAssociatedToEmployee(String personId) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("empId", personId);
+        namedParameterJdbcTemplate.update(DELETE_EMP_SHIFTS, params);
+    }
+
+    public void deleteEmployee(String personId) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("empId", personId);
+        namedParameterJdbcTemplate.update(DELETE_EMPLOYEE, params);
+    }
 }

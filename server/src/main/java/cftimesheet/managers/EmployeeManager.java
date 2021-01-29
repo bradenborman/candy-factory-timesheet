@@ -33,4 +33,10 @@ public class EmployeeManager {
         employeeDao.updateEmployee(updateEmployeeRequest);
     }
 
+    public void deleteUser(String personId) {
+        logger.info("Deleting Employee Id: {}", personId);
+        employeeDao.deleteShiftsAssociatedToEmployee(personId);
+        employeeDao.deleteEmployee(personId);
+        logger.info("Employee Removed");
+    }
 }
