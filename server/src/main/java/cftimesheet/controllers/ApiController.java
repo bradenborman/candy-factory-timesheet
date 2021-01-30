@@ -79,7 +79,7 @@ public class ApiController {
         ByteArrayResource excelFile = excelService
                 .setShiftsWorked(shiftsWorkedToday)
                 .withStartingWorkbook()
-                .withHeaders(L_NAME, F_NAME, PHONE, EMAIL, ADDRESS, VENMO, PAYPAL, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED)
+                .withHeaders(L_NAME, F_NAME, PHONE, EMAIL, ADDRESS, VENMO, PAYPAL, CLOCK_IN, CLOCK_OUT, TOTAL_TIME_WORKED, TOTAL_TIME_WORKED_MIN_TOTAL)
                 .createRowsFromShiftsWorked()
                 .autoSizeColumns()
                 .toFile();
