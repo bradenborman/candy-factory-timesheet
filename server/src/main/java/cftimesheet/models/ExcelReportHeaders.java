@@ -14,7 +14,7 @@ public enum ExcelReportHeaders {
     CLOCK_IN("Clocked In"),
     CLOCK_OUT("Clocked Out"),
     TOTAL_TIME_WORKED("Total Time Worked"),
-    TOTAL_TIME_WORKED_MIN_TOTAL("Total Time Worked");
+    TOTAL_TIME_WORKED_MIN_TOTAL("Total Minutes Worked");
 
     String displayName;
 
