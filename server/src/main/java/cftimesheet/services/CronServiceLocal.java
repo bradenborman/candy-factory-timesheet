@@ -46,7 +46,7 @@ public class CronServiceLocal {
 
         do {
             try {
-                emailSendingService.sendWorksheetEmail(excelFile);
+//                emailSendingService.sendWorksheetEmail(excelFile);
                 attempts = 3;
             }
             catch (Exception e){
