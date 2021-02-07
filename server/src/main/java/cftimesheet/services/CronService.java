@@ -42,7 +42,18 @@ public class CronService {
                 .autoSizeColumns()
                 .toFile();
 
-        emailSendingService.sendTestEmail(excelFile);
+        int attempts = 0;
+
+        do {
+            try {
+                emailSendingService.sendWorksheetEmail(excelFile);
+                attempts = 3;
+            }
+            catch (Exception e){
+                logger.info("Failed to send email. Trying again");
+                attempts = attempts + 1;
+            }
+        } while (attempts < 3);
     }
 
 }

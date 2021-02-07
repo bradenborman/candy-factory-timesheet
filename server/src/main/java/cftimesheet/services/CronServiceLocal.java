@@ -29,7 +29,7 @@ public class CronServiceLocal {
     @Autowired
     DataRetrievalService dataRetrievalService;
 
-    @Scheduled(cron = "0 */30 * ? * *") // Every 5 minutes
+    @Scheduled(cron = "0 */2 * ? * *") // Every 5 minutes
     public void sendEightPmReportReal() {
         logger.info("sendEightPmReportReal Task Hit");
         ExcelReportService excelReportService = new ExcelReportService();
@@ -42,7 +42,18 @@ public class CronServiceLocal {
                 .autoSizeColumns()
                 .toFile();
 
-        emailSendingService.sendTestEmail(excelFile);
+        int attempts = 0;
+
+        do {
+            try {
+                emailSendingService.sendWorksheetEmail(excelFile);
+                attempts = 3;
+            }
+            catch (Exception e){
+                logger.info("Failed to send email. Trying again");
+                attempts = attempts + 1;
+            }
+        } while (attempts < 3);
     }
 
 }

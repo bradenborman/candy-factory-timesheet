@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Arrays;
 
 @Service
 public class EmailSendingService {
@@ -19,11 +20,11 @@ public class EmailSendingService {
     @Autowired
     private JavaMailSenderImpl javaMailSender;
 
-    public void sendTestEmail(ByteArrayResource file) {
-        String receivingAddress = "bradenborman@hotmail.com";
+    public void sendWorksheetEmail(ByteArrayResource file) {
+        String[] receivingAddress =  new String[] {"bradenborman@hotmail.com", "amyatkinson19@hotmail.com"};
         MimeMessage message = javaMailSender.createMimeMessage();
         try {
-            logger.info("Sending email to {}", receivingAddress);
+            logger.info("Sending email to {}", Arrays.toString(receivingAddress));
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(receivingAddress);
             helper.setSubject("Today's Timesheet");
@@ -31,6 +32,7 @@ public class EmailSendingService {
             helper.addAttachment("todaystimesheet.xlsx", file);
         } catch (MessagingException e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to send email!");
         }
 
         javaMailSender.send(message);
